@@ -27,6 +27,13 @@ body {
     margin-bottom: 10px;
     border-radius: 15px;
 }
+
+.input-group input {
+    color: #000;
+}
+.form-group input {
+    color: #000;
+}
 /* Scrollbar */
 
 /* width */
@@ -207,7 +214,8 @@ body {
     padding-bottom: 100px;
 }
 h1,h2,h3,h4,h5,h6 {
-    color: #ccc;
+    color: #333;
+    text-shadow: 0 1px 1px #ccc;
 }
 .spread-h3 {
     margin-top: 50px;
@@ -1227,8 +1235,10 @@ h1,h2,h3,h4,h5,h6 {
     margin-bottom: 20px;
 }
 .post-body p {
-    padding: 30px;
-    padding-top: 20px;
+    padding: 8px;
+    color: #ccc;
+    text-shadow: 0 0 1px #555;
+    font-size: 1.2rem;
 }
 .ss-post p {
     font-size: 1.2rem;
@@ -1244,15 +1254,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 .post-actions i {
     color: lightskyblue;
-    text-shadow: 0 0 2px white;
-    opacity: 0.5;
-    transition: ease-in 0.3s;
-}
-.post-actions i:hover {
-    color: lightskyblue;
-    text-shadow: 0 0 2px white;
-    opacity: 1;
-    transition: ease-in 0.3s;
+    text-shadow: 0 0 2ease-in 0.3s;
 }
 .comment-actions i {
     color: lightskyblue;
@@ -1261,7 +1263,15 @@ h1,h2,h3,h4,h5,h6 {
     transition: ease-in 0.3s;
     font-size: 1.2rem;
     margin-left: 8px;
+}px white;
+    opacity: 0.5;
+    transition: ease-in 0.3s;
 }
+.post-actions i:hover {
+    color: lightskyblue;
+    text-shadow: 0 0 2px white;
+    opacity: 1;
+    transition: 
 .comment-actions i:hover {
     color: lightskyblue;
     text-shadow: 0 0 2px white;

@@ -272,7 +272,6 @@
         min-width: 300px;
         box-shadow: 0 8px rgba(0, 0, 0, 0.445);
         background: rgba(255, 255, 255, 0.37);
-        backdrop-filter: blur(2px);
         z-index: 10;
         border-top-left-radius: 2px;
         border-top-right-radius: 2px;
@@ -281,7 +280,6 @@
         color: #fff;
     }
     .possible-friend-background {
-        backdrop-filter: blur(0px);
         overflow: hidden;
         border-radius: 15px;
     }
@@ -401,7 +399,6 @@
   border: 1px solid #ccc;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(4px);
-  border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   display: inline-flex;
 }
@@ -486,7 +483,6 @@
 }
 .spread-post p {
     text-align: center;
-    color: #fff;
     margin-bottom: 5px;
 }
 .boolean-options {
@@ -530,12 +526,13 @@
 }
 .spreaded {
     max-height: 400px;
-    overflow-x: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     width: 100%;
+    border-top: inset 2px #000;
 }
 .new-spread {
-    padding-top: 15px;
-    border-top: groove 2px lightskyblue;
+    border-top: groove 2px #000;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background: rgba(255, 255, 255, 0.3);
@@ -567,16 +564,17 @@
     border-bottom-right-radius: 8px;
 }
 .post-author {
-    backdrop-filter: 4px;
+    backdrop-filter: blur(4px);
     margin-top: 20px;
     text-align: center;
     border: groove 2px lightskyblue;
     border-left: none;
     border-right: none;
     padding-top: 10px;
+    background: rgba(255, 255, 255, 0.85);
 }
 .post-body {
-    padding: 15px;
+    padding: 5px;
     color: #fff;
 }
 .post-comments {
@@ -585,6 +583,7 @@
     margin-top: -20px;
     margin-bottom: 40px;
     width: 80%;
+    padding-bottom: 5;
     margin-left: 5%;
     border-bottom: groove 2px lightskyblue;
     border-bottom-left-radius: 8px;
@@ -633,6 +632,12 @@
     padding: 10px;
     display: block;
     width: 100%;
+}
+.comment-author-name h6 {
+    color: rgba(255, 255, 255, 0.884);
+    text-shadow: 0 0 1px lightskyblue;
+    padding-bottom: 3px;
+    border-bottom: solid 1px lightskyblue;
 }
 .comment-body {
     padding: 8px;
@@ -1044,7 +1049,17 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
         width: none;
         border-radius: 0;
         margin: 0;
-        color: lightskyblue;
+        border: solid 1px rgba(255, 255, 255, 0.644);
+        padding: 10px;
+        background: rgba(204, 204, 204, 0.123);
+        backdrop-filter: blur(1px);
+        border-radius: 5px;
+        font-size: 1.3rem;
+        color: rgba(23, 38, 88, 0.8);
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.452);
+    }
+    .dashboard-container p a:hover {
+        color: #fff;
     }
     .dashboard-container a {
         width: 100%;
@@ -1200,7 +1215,6 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
         min-width: 300px;
         box-shadow: 0 8px rgba(0, 0, 0, 0.445);
         background: rgba(255, 255, 255, 0.37);
-        backdrop-filter: blur(2px);
         z-index: 10;
         border-top-left-radius: 2px;
         border-top-right-radius: 2px;
@@ -1209,7 +1223,6 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
         color: #fff;
     }
     .possible-friend-background {
-        backdrop-filter: blur(0px);
         overflow: hidden;
         border-radius: 15px;
     }
@@ -1376,14 +1389,19 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
     backdrop-filter: blur(2px);
     margin-top: 30px;
     width: 90%;
-    padding: 10px;
     border-top: groove 2px #fff;
     border-bottom: groove 2px #fff;
     border-right: groove 2px #fff;
     border-top-right-radius: 8px;
+    margin-bottom: 60px;
     border-bottom-right-radius: 8px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
 }
+.spreader-container h5 {
+    padding-top: 8px;
+    font-size: 1.2rem;
+}
+
 .tab {
   overflow: hidden;
   overflow-x: scroll;
@@ -1391,14 +1409,11 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
   border: 1px solid #ccc;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(4px);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
   display: inline-flex;
 }
 
 /* Style the buttons that are used to open the tab content */
 .tab button {
-  background: rgba(135, 206, 250, 0.5);
   float: left;
   border: none;
   outline: none;
@@ -1408,6 +1423,7 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
   margin-left: 0;
   border-radius: 0;
   
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Change background color of buttons on hover */
@@ -1417,7 +1433,11 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: rgba(255, 255, 255, 0.5);
+  background: rgba(135, 206, 250, 0.5);
+  color: #000;
+  font-weight: bold;
+  text-shadow: 0 0 1px #222;
+
 }
 
 /* Style the tab content */
@@ -1476,7 +1496,6 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 }
 .spread-post p {
     text-align: center;
-    color: #fff;
     margin-bottom: 5px;
 }
 .boolean-options {
@@ -1520,17 +1539,23 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 }
 .spreaded {
     max-height: 400px;
-    overflow-x: scroll;
     width: 100%;
 }
 .new-spread {
-    padding-top: 15px;
-    border-top: groove 2px lightskyblue;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(2px);
+    border-top: outset 4px rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background: rgba(135, 206, 250, 0.3);
+    backdrop-filter: blur(4px);
     box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.527);
+}
+.new-spread-header {
+}
+.new-spread-header h5 {
+    color: #fff;
+    font-weight: bolder;
+    font-size: 1.3rem;
+    text-shadow: 0 1px 1px #000;
 }
 .new-spread button {
     border-bottom-left-radius: 0;
@@ -1560,6 +1585,8 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
     height: 100%;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    box-shadow: 0 3px 5px #000;
+    border-bottom: outset 2px rgba(135, 206, 250, 0.5);
 }
 .post-author {
     backdrop-filter: 4px;
@@ -1571,12 +1598,13 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
     padding-top: 10px;
 }
 .post-body {
-    padding: 15px;
+    padding: 5px;
     color: #fff;
 }
 .post-comments {
     position: relative;
-    background: rgba(150, 150, 150, 0.3);
+    background: rgba(135, 206, 250, 0.15);
+    backdrop-filter: blur(2px);
     margin-top: -20px;
     margin-bottom: 40px;
     width: 80%;
@@ -1587,9 +1615,10 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 }
 .post-comments h4 {
     text-align: center;
-    padding: 10px;
-    padding-top: 15px;
-    text-shadow: 0 0 2px #fff;
+    padding: 5px;
+    padding-top: 8px;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    color: lightskyblue;
 }
 
 .post-comments p {
@@ -1615,10 +1644,14 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 }
 .comment-right {
     width: fit-content;
+    padding-left: 10px;
 }
 .comment-author-image {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
+    border-top: lightskyblue 1px outset;
+    border-bottom: lightskyblue 1px outset;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
 }
 .comment-author-image img {
     border-top-right-radius: 8px;
@@ -1627,6 +1660,7 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 .comment-author-name {
     padding: 10px;
     display: block;
+    
     width: 100%;
 }
 .comment-body {
@@ -1882,8 +1916,7 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 .possible-friend-image {
     width: 80px;
     height: auto;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -1906,12 +1939,9 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
     height: 250px;
     left: 0;
     min-width: 30px;
-    background: none;
-    background:rgba(255, 255, 255, 0.3);
     width: 100%;
     border-top: groove 2px #fff;
     border-bottom: groove 2px #fff;
-    z-index: 2;
     border-radius: 8px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -1931,21 +1961,21 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
     transform: rotate(270deg);
     margin: 0;
     position: absolute;
-    top: 30px;
+    top: 60px;
     font-size: 0.8rem;
-    left: 8px;
+    left: -75px;
     padding: 5px;
     border-top: groove 2px lightskyblue;
     border-right: groove 2px lightskyblue;
     border-left: groove 2px lightskyblue;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
-    z-index: 6;
+    z-index: 50;
 }
 .possible-friend-data {
     margin: 0;
     position: absolute;
-    top: 110px;
+    top: 140px;
     left: 0;
     background: rgba(0, 0, 0, 0.3);
     width: 80px;
@@ -2051,7 +2081,7 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
         max-height: 350px;
     }
     .new-friend {
-        margin-left: 20px;
+        margin-left: 50px;
         position: relative;
         height: 90%;
         width: 80px;
@@ -2069,8 +2099,6 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
         max-height: 120;
         min-height: 120px;
         overflow-y: hidden;
-        border-bottom-left-radius: 50%;
-        border-bottom-right-radius: 50%;
     }
     
     .possible-friend-image img {
@@ -2091,19 +2119,19 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         border-bottom: groove 2px lightskyblue;
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(2px);
-        color: #fff;
+        background: rgba(0, 0, 0, 0.5);
+        color: #555;
+        z-index: 60;
     }
     .possible-friend-data {
         position: absolute;
         bottom: 0;
         left: 0;
+        max-height: 150px;
+        padding-top: 30px;
         width: 100%;
         background:rgba(0, 0, 0, 0.3);
         padding: 10px;
-        border-top: groove 2px lightskyblue;
-        border-bottom: groove 2px lightskyblue;
     }
     .possible-friend-data p {
         margin-bottom: 0;
@@ -2153,7 +2181,11 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 
 @media screen and (max-width: 2560px) {
         .dashboard-container {
-            background: lime;
+            margin-top: 30px
+            background: rgba(143, 119, 119, 0.25);
+            backdrop-filter: blur(2px);
+        }
+        .dashboard-container a {
         }
         .widespread-center-logo {
             z-index: 250000;
@@ -2182,15 +2214,13 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 
 
 </style>
-
-<div class="user-background-image">
+  <div class="user-background-image">
     <% if (profile.user_background_image) { %>
         <img src="<%= profile.user_background_image %>" alt="<%= profile.fname %> <%= profile.lname %>'s Avatar">
     <% } else { %>
             <div class="user-background-color" style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; background: <%= profile.favColor1 %>"></div>
     <% } %>
 </div>
-
 
 <%- include('partials/mainHeaderSiteMenu') %>
 <div class="intro-message" data-title="Page Slider Menu" data-intro="Slide this menu left and right to access more features. SocialSpread, YourSpread, SpreadChat(Real-time text, audio, video chat), Tools(Notes, ToDo's, Encyclopedia, Dictionary, etc.), SpreadShield & FlexFloor.">
@@ -2257,8 +2287,6 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 
 
 <div class="spreader-container">
-    <h5 style="text-align: center;">Spread Something</h5>
-    <p style="width: 100%; text-align: center; font-size: 0.6rem; color: lightskyblue;">Scroll left & right for more Spreaders</p>
     <div class="tab" data-title="The Spreader" data-intro="This is where you can Spread things!">
         <button data-title="SocialSpread" data-intro="Post something you want to tell the world!" class="tablinks" id="defaultOpen" onclick="openCity(event, 'Post')">Post</button>
         <button data-title="Articles" data-intro="Would you like to write an article? Here is where it can happen!"  class="tablinks" onclick="openCity(event, 'Article')">Article</button>
@@ -2329,7 +2357,9 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
                         </ul>
             </div>
             <div class="new-spread">
-                <h5>Create New Post</h5>
+                <div class="new-spread-header">
+                    <h5>Spread Something</h5>
+                </div>
                 <form action="/users/<%= id %>/post" method="POST">
                     <textarea required name="postBody" id="postBody" class="form-control" placeholder="Spread something..."></textarea>
                     <button class="button" type="submit">Spread It</button>
@@ -2604,70 +2634,7 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 
 <!-- Second Test Slider -->
 
-<div class="spread-slider-photos">
-    <div class="spread-slider-header">
-        <h5>Saved Photos</h5>
-    </div>
-    <div class="spread-slider">
-        <% profile.user_inspread_images.forEach(function(image){ %>
-            <div class="slide">
-                <div class="slide-background">
-                    <img src="<%= image %>">
-                </div>
-                <div class="spread-menu">
 
-                    <div class="menu">
-                        <input type="checkbox" id="<%= image %>" class="toggle"/>
-                        <label id="show-menu" for="<%= image %>">
-                          <div class="btn">
-                            <i class="fas fa-project-diagram toggleBtn menuBtn"></i>
-                            <i class="material-icons md-36 toggleBtn closeBtn">close</i>
-                          </div>
-                          <div class="btn" title="Make your background image - Dashboard & Public Profile">
-                              <form action="/users/change-main-background-image-url?_method=PATCH" method="post">
-                                <input type="text" name="bgImage" value="<%= image %>" hidden>
-                                <button type="submit"><i class="far fa-image"></i></button>
-                            </form>
-                          </div>
-                          <div class="btn" title="Like this">
-                            <i class="far fa-heart"></i>
-                          </div>
-                          <div class="btn" title="Share this">
-                            <form action="/users/share-image-url" method="post">
-                                <input type="text" name="shareImageURL" value="<%= image %>" hidden>
-                                <button type="submit"><i class="fas fa-share-alt"></i></button>
-                            </form>
-                          </div>
-                          <div class="btn" title="Comment on this">
-                            <i class="far fa-comment-alt"></i>
-                          </div>
-                          <div class="btn" title="Save this">
-                            <form action="/users/save-image-url?_method=PATCH" method="post">
-                                <input type="text" name="saveImageURL" value="<%= image %>" hidden>
-                                <button type="submit"><i class="far fa-save"></i></button>
-                            </form>
-                          </div>
-                          <div class="btn" title="Add this">
-                            <form action="/users/add-image-url?_method=PATCH" method="post">
-                              <input type="text" name="addImageURL" value="<%= image %>" hidden>
-                              <button type="submit"><i class="fas fa-plus"></i></button>
-                          </form>
-                          </div>
-                          <div class="btn" title="Find more near this location">
-                            <i class="fas fa-search-location"></i>
-                          </div>
-                          <div class="btn" title="More Information">
-                            <i class="fas fa-info"></i>
-                          </div>
-                        </label>
-                      </div>
-
-                </div>
-
-            </div>
-        <% }); %>
-    </div>
-</div>
 
 
 
