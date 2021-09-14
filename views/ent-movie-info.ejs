@@ -1,4 +1,191 @@
 <style>
+
+
+    .spread-break-cross {
+        background: rgba(120, 120, 120, 0.75);
+        height: 3px;
+        max-height: 3px;
+        min-height: 3px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+        box-shadow: 0 0 4px rgba(135, 206, 250, 0.75);
+    }
+
+
+    .previous-page-nav-container {
+        background: rgba(135, 206, 250, 0.25);
+        backdrop-filter: blur(4px);
+        text-align: center;
+        width: 100%;
+        padding: 5px;
+    }
+    .previous-page-nav-container a {
+        width: 100%;
+        min-width: 100%;
+        display: block;
+        padding: 3px;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-shadow: 0 0 1px rgba(255, 255, 255, 0.25);
+
+    }
+    .movie-container {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(2px);
+        padding-top: 10px;
+        margin-top: 20px;
+        border-top: outset 2px #555;
+        border-bottom: outset 2px #555;
+        position: relative;
+    }
+    .movie-poster {
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        
+    }
+    .movie-poster img {
+        min-height: 100vh;
+        width: auto;
+
+    }
+    .movie-title {
+        text-align: center;
+        padding: 5px;
+    }
+    .movie-title h5 {
+        font-size: 1.4rem;
+    }
+
+
+    .video-stream {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+    .spreadshield-link {
+        background: blue;
+    }
+    .viewing-options-menu-container {
+        margin-bottom: 20px;
+    }
+    .viewing-options-menu {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .link-item {
+        background: rgba(135, 206, 250, 0.25);
+        padding: 10px;
+        border-radius: 8px;
+        border-top: outset 2px rgba(255, 255, 255, 0.5);
+        border-bottom: outset 2px rgba(255, 255, 255, 0.5);
+        box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.005);
+    }
+    .link-item a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    #videoFrame {
+        background: rgba(0, 0, 0, 0.87);
+        backdrop-filter: blur(3px);
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.336);
+        min-width: 100%;
+        border-radius: 6px;
+        padding: 2px;
+    }
+
+    .movie-plot {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        border-top: outset 2px #888;
+        border-bottom: outset 2px #888;
+        padding: 5px;
+    }
+    .movie-plot h5 {
+        font-size: 1.5rem;
+        color: rgba(135, 206, 250, 0.5);
+        border-bottom: outset 1px rgba(135, 206, 250, 0.3);
+    }
+    .movie-plot p {
+        padding: 3px;
+        color: #fff;
+        font-size: 1rem;
+    }
+
+    
+        .movie-ratings {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        border-top: outset 2px #888;
+        border-bottom: outset 2px #888;
+        padding: 5px;
+    }
+    .movie-ratings h5 {
+        font-size: 1.5rem;
+        color: rgba(135, 206, 250, 0.5);
+        border-bottom: outset 1px rgba(135, 206, 250, 0.3);
+    }
+    .movie-ratings p {
+        padding: 3px;
+        color: #fff;
+        font-size: 1rem;
+    }
+
+        .movie-crew {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        border-top: outset 2px #888;
+        border-bottom: outset 2px #888;
+        padding: 5px;
+    }
+    .movie-crew h5 {
+        font-size: 1.5rem;
+        color: rgba(135, 206, 250, 0.5);
+        border-bottom: outset 1px rgba(135, 206, 250, 0.3);
+    }
+    .movie-crew p {
+        padding: 3px;
+        color: #fff;
+        font-size: 1rem;
+    }
+
+        .movie-stats {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        border-top: outset 2px #888;
+        border-bottom: outset 2px #888;
+        padding: 5px;
+    }
+
+    .movie-stats h5 {
+        font-size: 1.5rem;
+        color: rgba(135, 206, 250, 0.5);
+        border-bottom: outset 1px rgba(135, 206, 250, 0.3);
+    }
+    .movie-stats p {
+        padding: 3px;
+        color: #fff;
+        font-size: 1rem;
+    }
+
+
+
+
+
+
+
+
+
     .add-to-recommended {
         position: fixed;
         bottom: 0;
@@ -16,28 +203,16 @@
         color: #fff;
         padding: 10px;
     }
-    .spread-break hr {
-    background: lightskyblue;
-    box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.534);
-    width: 80%;
-    margin-left: 10%;
-    border-radius: 50%;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    }
-    h5 {
-        text-align: center;
-    }
-    
+
     .movie-search {
         background: rgba(255, 255, 255, 0.3);
-        border-radius: 8px;
+        backdrop-filter: blur(4px);
         border-top: groove 2px lightskyblue;
         border-bottom: groove 2px lightskyblue;
         padding: 10px;
         padding-bottom: 0;
         width: 100%;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
     }
     .movie-search input {
         width: 90%;
@@ -56,10 +231,14 @@
         margin-bottom: 0;
         color: #fff;
         margin-top: 10px;
+        border-radius: none;
         border-top-left-radius: 8px;  
         border-top-right-radius: 8px;  
     }
-    p {
+
+
+
+   /*  p {
         color: #fff;
     }
     .spreadshield-link p {
@@ -112,7 +291,10 @@
         border-radius: 8px;
 
     }
-    .add-to-list {
+     */
+    
+    
+     .add-to-list {
         width: 100%;
     }
     .add-to-list button {
@@ -144,45 +326,69 @@
         color: #fff;
         text-align: center;
     }
+
+
+
+    @media screen and (min-width: 500px) {
+        .movie-search {
+            margin-top: 100px;
+        }
+        .video-stream {
+            background: lime;
+            min-height: 300px;
+        }
+        #videoFrame {
+            min-height: 300px;
+        }
+        .movie-poster img {
+            min-width: 100vw;
+
+        }
+
+
+    }
 </style>
 
-<div class="main-header-page-menu-container">
-    <div id="mainHeaderPageMenu">
-        <div class="main-header-page-menu-inner">
-            <a href="/entertainment">Entertainment Home</a>
-            <a href="/entertainment/movies">Movies</a>
-            <a href="/entertainment/tv">TV Shows</a>
-            <a href="/entertainment/videos">Videos</a>
-            <a href="/entertainment/music">Music</a>
-            <a href="/entertainment/podcasts">Podcasts</a>
-            <a href="/entertainment/audio-books">Audio Books</a>
-            <a href="/entertainment/sports">Sports</a>
-
-        </div>
+    <!-- BACKGROUND IMAGE -->
+    <div class="movie-poster">
+        <img src="<%= returnedData.Poster %>" alt="">
     </div>
-    <p>Scroll left & right for more options</p>
-</div>
-
+<!-- SEARCH BAR -->
 <div class="movie-search">
     <form action="/entertainment/movies/search" method="POST">
         <input type="text" name="movie" id="movie" placeholder="Search for movies...">
         <button type="submit">Search</button>
     </form>
 </div>
-<div class="movie-poster">
+
+
+
+<div class="previous-page-nav-container">
+    <a href="/entertainment/movies">Back to All Movies</a>
 </div>
 
 <div class="movie-container">
+
     <div class="movie-title">
-        <h1><%= returnedData.Title %></h1>
+        <h5><%= returnedData.Title %></h5>
     </div>
-    <div class="spreadshield-link">
-        <p><a href="/entertainment/movies/<%= movie %>/vr">Watch in VR</a></p>
-        <p><a href="/entertainment/movies/<%= movie %>/spreadshield">Watch on SpreadShield</a></p>
-    </div>
+
     <div class="video-stream">
         <iframe id="videoFrame" src="https://www.2embed.ru/embed/imdb/movie?id=<%= returnedData.imdbID %>" frameborder="0" allowfullscreen="true"></iframe>
     </div>
+
+    <div class="viewing-options-menu-container">
+        <div class="viewing-options-menu">
+            <div class="link-item">
+                <a href="/entertainment/movies/<%= movie %>/vr">VR</a>
+            </div>
+            <div class="link-item">
+                <a href="/entertainment/movies/<%= movie %>/spreadshield">SpreadShield</a>
+            </div>
+        </div>
+    </div>
+
+
     <div class="movie-data">
         <div class="add-to-list">
             <form action="/entertainment/movies/save" method="post">
@@ -193,23 +399,27 @@
             </form>
             <p><a href="/yourspread">See Your List</a></p>
         </div>
-        <div class="spread-break">
+
+        <div class="spread-break-cross">
             <hr>
         </div>
+
         <div class="movie-plot">
             <h5>Plot</h5>
             <p><%= returnedData.Plot %></p>
         </div>
-            <div class="spread-break">
+
+            <div class="spread-break-cross">
                 <hr>
             </div>
-            <h5>Ratings</h5>
+
             <div class="movie-ratings">
+                <h5>Ratings</h5>
                 <% returnedData.Ratings.forEach(function(rating) { %>
                     <p><%= rating.Source %>: <%= rating.Value %></p>
                 <% }) %>
             </div>
-        <div class="spread-break">
+        <div class="spread-break-cross-cross">
             <hr>
         </div>
         <div class="movie-crew">
@@ -219,7 +429,7 @@
             <p>Cast: <%= returnedData.Actors %></p>
         </div>
     </div>
-    <div class="spread-break">
+    <div class="spread-break-cross">
         <hr>
     </div>
     <div class="movie-stats">
@@ -248,6 +458,29 @@
         <button type="submit">Add to WideSpread Collection</button>
     </form>
 </div>
+
+
+
+<!-- OLD PAGE -->
+
+
+<div class="main-header-page-menu-container">
+    <div id="mainHeaderPageMenu">
+        <div class="main-header-page-menu-inner">
+            <a href="/entertainment">Entertainment Home</a>
+            <a href="/entertainment/movies">Movies</a>
+            <a href="/entertainment/tv">TV Shows</a>
+            <a href="/entertainment/videos">Videos</a>
+            <a href="/entertainment/music">Music</a>
+            <a href="/entertainment/podcasts">Podcasts</a>
+            <a href="/entertainment/audio-books">Audio Books</a>
+            <a href="/entertainment/sports">Sports</a>
+
+        </div>
+    </div>
+    <p>Scroll left & right for more options</p>
+</div>
+
 
 
 <script>
