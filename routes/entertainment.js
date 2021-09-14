@@ -21,7 +21,22 @@ const fs = require('fs');
 
 router.get('/', async (req, res) => {
     const movies = await Movie.find()
-	res.render('ent-home', { movies});
+
+    const apiKey = process.env.TMDB_API_KEY
+    const options = {
+      method: 'GET',
+      url: `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}`
+    };
+
+    axios.request(options).then(function (response) {
+      const returnedData = response.data;
+      //console.log(returnedData)
+      res.render('ent-home', { returnedData, movies});
+    }).catch(function (error) {
+      console.error(error);
+    });
+
+
 });
 
 
@@ -77,8 +92,8 @@ axios.request(options).then(function (response) {
     const returnedData = response.data;
 
     res.render('ent-movie-info', {returnedData, movie});
-}).catch(function (error) {
-	console.error(error);
+  }).catch(function (error) {
+    console.error(error);
 });
 });
 
