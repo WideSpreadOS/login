@@ -1,36 +1,317 @@
 <style>
-    .slider-container {
+
+
+.main-header-page-menu-container {
+    background: hotpink;
+}
+    .spread-page-title {
+        background: rgba(166, 216, 247, 0.445);
         text-align: center;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 8px;
-        border-left: groove 1px lightskyblue;
-        border-right: groove 1px lightskyblue;
-        padding: 20px;
+        padding: 5px;
+        border-top: outset 2px #555;
+        border-bottom: outset 2px #555;
+        box-shadow: 0 0 4px #555, 0 0 2px lightskyblue;
+        margin-bottom: 40px;
     }
-    .slider-container p {
-        padding-top: 15px;
-        color: lightskyblue;
+    .spread-page-title h1{
+        color: rgba(37, 48, 48, 0.829);
+        text-shadow: 0 0 2px rgba(255, 255, 255, 0.671);
         margin-bottom: 0;
-        padding-bottom: 0;
+
     }
-    .slider-container small {
-        color: lightskyblue;
+
+
+    .spread-header-container {
+        margin-bottom: 30px;
+        min-height: 150px;
+        max-height: 150px;
+        overflow: hidden;
+        position: relative;
     }
-    .entertainment-categories {
+    .spread-slider-container {
+        min-height: 200px;
+        margin-top: 10px;
+        border-top: outset 2px #333;
+        border-bottom: outset 2px #333;
     }
-    .entertainment-categories a {
-        background: rgba(255, 255, 255, 0.3);
-        border-top: groove 2px lightskyblue;
-        border-bottom: groove 2px lightskyblue;
-        color: #fff;
-        padding: 8px;
+
+    .spread-slider {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .spread-slider-item {
+        margin-bottom: 10px;
+    }
+    .spread-slider-item-background {
+    }
+    .spread-slider-item-background img {
         border-radius: 8px;
-        margin-left: 8px;
+        max-width: 150px;
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.534);
+    }
+    .spread-header-slider-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        min-height: 150px;
+        
+        
+    }
+    
+    .spread-header-slider-item {
+        min-height: 150px;
+        min-height: 100%;
+        background: rgba(0, 0, 0, 0.25);
+        height: 100px;
+        border: solid 1px #fff;
+        box-shadow: inset 0 0 3px rgba(135, 206, 250, 0.6);
+        border-top: none;
+        width: 20%;
+    }
+    .spread-header-slider-item p {
+        color: #fff;
+    }
+
+    .spread-header-main {
+        background: rgba(187, 187, 221, 0.329);
+        bottom: 5px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 20px;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .spread-header-menu {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+    .spread-header-menu-zone-container {
+        background: rgba(187, 187, 221, 0.329);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        border-top: outset 2px #555;
+        backdrop-filter: blur(4px);
+
+    }
+
+    .spread-header-menu-zone-item {
+        padding: 5px;
+    }
+
+/* MAIN SPREAD CONTENT */
+
+    .main-spread-content {
+        border-bottom: teal 1px solid;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    .main-spread-content-header-container {
+        background: rgba(166, 216, 247, 0.445);
+        padding: 5px;
+        border-bottom: outset 2px #555;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    .main-spread-content-header {
+        text-align: center;
+    }
+
+    .main-spread-content-header-title {
+    }
+    .main-spread-content-header-title h4 {
+        margin-bottom: 0;
+    }
+
+    .spread-header-title {
+        text-align: center;
+        padding: 8px;
+        position: absolute;
+        padding: 6px;
+        width: 100%;
+        background: rgba(204, 204, 204, 0.3);
+        backdrop-filter: blur(4px);
+        border-bottom: outset 2px #555;
+        box-shadow: 0 0 3px rgba(135, 206, 250, 0.6), inset 0 0 8px #000;
+    }
+    .spread-header-title h4 {
+        margin-bottom: 0;
+    }
+
+    .spread-header-menu-container {
+        background: rgba(255, 255, 255, 0.001);
+        padding: 8px;
+    }
+
+
+
+    .spread-page-footer-container {
+        bottom: 0;
+        max-height: 40px;
     }
 </style>
-<div class="page-title">
+<div class="spread-page-title">
     <h1>Entertainment</h1>
 </div>
+
+
+<div class="spread-header-container">
+    <div id="spreadHeaderMain" class="spread-header-main">
+
+        <div class="spread-header-title">
+            <h4>In the Spotlight</h4>
+        </div>
+        
+        <div class="spread-header-menu-container">
+            <div class="spread-header-menu">
+                <div class="spread-header-menu-zone-container">
+                        <div class="spread-header-menu-zone-item">
+                            <div class="spread-button-container">
+                                <div class="spread-button-link">
+                                    <a href="#">
+                                        Btn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spread-header-menu-zone-item">
+                            <div class="spread-button-container">
+                                <div class="spread-button-link">
+                                    <a href="#">
+                                        Btn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spread-header-menu-zone-item">
+                            <div class="spread-button-container">
+                                <div class="spread-button-link">
+                                    <a href="#">
+                                        Btn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spread-header-menu-zone-item">
+                            <div class="spread-button-container">
+                                <div class="spread-button-link">
+                                    <a href="#">
+                                        Btn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spread-header-slider-container">
+            <div class="spread-header-slider-item">
+                <p>o</p>
+            </div>
+            <div class="spread-header-slider-item">
+                <p>o</p>
+            </div>
+            <div class="spread-header-slider-item">
+                <p>o</p>
+            </div>
+            <div class="spread-header-slider-item">
+                <p>o</p>
+            </div>
+            <div class="spread-header-slider-item">
+                <p>o</p>
+  
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- PAGE MAIN CONTENT -->
+
+<div class="main-spread-content">
+    <!-- MAIN CONTENT HEADER -->
+
+    <div class="main-spread-content-header-container">
+        <div class="main-spread-content-header">
+            <div class="main-spread-content-header-title">
+                <h4>New Attractions</h4>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="spread-slider-container">
+        <h5><a href="/entertainment/movies">See All Movies</a></h5>
+        <div class="spread-slider-anchor">
+            <div class="spread-slider-rack">
+                <div id="movieSpreadSlider" class="spread-slider">
+                    <!-- Movies forEach from DB as recommended: true -->
+                    <% movies.forEach(function(movie) { %> 
+                        <div class="spread-slider-item">
+                            <a href="/entertainment/movies/<%= movie.link %>">
+                                <div class="spread-slider-item-background">
+                                    <img src="<%= movie.poster %>" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="spread-slider-container">
+        <h5><a href="/entertainment/tv">See All TV Shows</a></h5>
+        <div class="spread-slider-anchor">
+            <div class="spread-slider-rack">
+                <div id="tvSpreadSlider" class="spread-slider">
+                    <!-- TV forEach from DB as recommended: true -->
+                    <p>TV Slider</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="spread-slider-container">
+        <h5><a href="/entertainment/music">See All Music</a></h5>
+        <div class="spread-slider-anchor">
+            <div class="spread-slider-rack">
+                <div id="musicSpreadSlider" class="spread-slider">
+                    <!-- Music forEach from DB as recommended: true -->
+                    <p>Music Slider</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<!-- OLD MENU -->
 
 <div class="main-header-page-menu-container">
     <div id="mainHeaderPageMenu">
@@ -38,7 +319,6 @@
             <a href="/entertainment">Entertainment Home</a>
             <a href="/entertainment/movies">Movies</a>
             <a href="/entertainment/tv">TV Shows</a>
-            <a href="/entertainment/videos/<%= user.id %>">Videos</a>
             <a href="/entertainment/music">Music</a>
             <a href="/entertainment/podcasts">Podcasts</a>
             <a href="/entertainment/audio-books">Audio Books</a>
@@ -49,15 +329,10 @@
     <p>Scroll left & right for more options</p>
 </div>
 
-<div class="entertainment-news">
-    <div class="articles">
-        <div class="article">
-            <h5>DUMMY ARTICLE 1</h5>
-            <p>Dummy article 1 preview</p>
-        </div>
-        <div class="article">
-            <h5>DUMMY ARTICLE 2</h5>
-            <p>Dummy article 2 preview</p>
-        </div>
-    </div>
+
+
+<!-- SPREADPAGE FOOTER -->
+
+<div class="spread-page-footer-container">
+    <h5>SpreadPage Footer</h5>
 </div>

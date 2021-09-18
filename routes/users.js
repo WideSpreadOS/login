@@ -32,12 +32,13 @@ const VrBackgroundImageUrl = require('../models/VrBackgroundUrl');
 router.get('/login', (req, res) => {
     const currentUser = null
     res.render('login', {currentPageTitle: 'Login', currentUser});
-})
+});
+
 // Register Page
 router.get('/register', (req, res) => {
     const currentUser = null
     res.render('register', {currentPageTitle: 'Register', currentUser});
-})
+});
 
 // Register Handle
 router.post('/register', (req, res) => {
@@ -106,7 +107,7 @@ router.post('/register', (req, res) => {
         })
         .catch();
     }
-})
+});
 
 
 // Login Handle
@@ -384,7 +385,7 @@ router.get('/new-resume/:userId', ensureAuthenticated, async (req, res) => {
     const user = await User.findById(userId)
     User.findById(userId)
     res.render('new-resume', {currentPageTitle: 'New Resume', user})
-})
+});
 router.post('/new-resume', ensureAuthenticated, async (req, res) => {
     const userId = req.user._id;
             
@@ -432,16 +433,16 @@ router.post('/new-resume', ensureAuthenticated, async (req, res) => {
                 }
                 )
             res.redirect('/business/your-desk');
-        })
+        });
         router.get('/add-to-resume/education/:resumeId', ensureAuthenticated, async (req, res) => {
             const user = req.user._id;
             const resumeId = req.params.resumeId;
             const resume = Resume.findById(resumeId);
             res.render('new-resume-add-to-education', {resume})
-        })
+        });
         router.patch('/add-to-resume/:resumeId', ensureAuthenticated, async (req, res) => {
 
-        })
+        });
         router.patch('/update-resume/:resumeId', ensureAuthenticated, async (req, res, next) => {
             try {
                 const resumeOwner  = req.user._id;
@@ -473,7 +474,7 @@ router.get('/resumes', ensureAuthenticated, async (req, res) => {
     const resume = await Resume.find({resumeOwner: {$eq: userId}})
     Resume.find({resumeOwner: {$eq: userId}})
     res.render('resumes', {currentPageTitle: 'Your Resumes', resume})
-})
+});
 
 router.get('/resume/:resumeId', ensureAuthenticated, async (req, res) => {
     const resumeId = req.params.resumeId;
@@ -484,7 +485,7 @@ router.get('/resume/:resumeId', ensureAuthenticated, async (req, res) => {
     Resume.findById(resumeId);
 
     res.render('resume', {currentPageTitle: 'Resume', resume, hiringId})
-})
+});
 
 
 router.post('/:id/post', ensureAuthenticated, (req, res) => {
@@ -524,7 +525,7 @@ router.get('/posts/:postId', ensureAuthenticated, async (req, res) => {
         console.log("POST AUTHOR: " + postAuthor.fname)
         
         res.render('full-post', {thisPost, postAuthor, currentPageTitle: thisPost.author + "'s Post"})
-})
+});
 
 
 
@@ -536,7 +537,7 @@ router.get('/post/:postId', (req, res) => {
     }
     const id = req.user.id;
     res.render('delete-post', {post, id})
-})
+});
 // Editing Posts
 router.get('/post/edit/:postId', ensureAuthenticated, async (req, res) => {
     const postId = req.params.postId;
@@ -544,7 +545,7 @@ router.get('/post/edit/:postId', ensureAuthenticated, async (req, res) => {
 
     const id = req.user.id;
     res.render('edit-post', {thisPost})
-})
+});
 
 router.patch('/post/edit/:postId', async (req, res) => {
     try {
@@ -558,6 +559,8 @@ router.patch('/post/edit/:postId', async (req, res) => {
 }
 
 });
+
+
 // Deleting Posts
 router.delete('/post/:postId', async (req, res) => {
     const post = req.params.postId;
@@ -573,7 +576,7 @@ router.get('/comment/:commentId/edit', async (req, res) => {
     const comment = await Comment.findById(commentId);
     console.log(`Comment: ${comment}`)
     res.render('edit-comment', {comment})
-})
+});
 router.patch('/comment/:commentId/edit', async (req, res) => {
     try {
     const comment = req.params.commentId;
@@ -712,7 +715,7 @@ router.get('/articles/:articleId', ensureAuthenticated, async (req, res) => {
       console.log("POST AUTHOR: " + articleAuthor.fname)
       
       res.render('full-article', {thisArticle, articleAuthor, thisUser, currentPageTitle: "An Article by:  " + articleAuthor.fname + " " + articleAuthor.lname})
-})
+});
 
 
 // MUST BE AT BOTTOM BEFORE MODULE.EXPORTS

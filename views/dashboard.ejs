@@ -1055,8 +1055,8 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
         backdrop-filter: blur(1px);
         border-radius: 5px;
         font-size: 1.3rem;
-        color: rgba(23, 38, 88, 0.8);
-        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.452);
+color: rgba(126, 127, 128, 0.74);
+    text-shadow: 0 0 1px rgb(135 206 250 / 75%);
     }
     .dashboard-container p a:hover {
         color: #fff;
@@ -2047,7 +2047,6 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
     .logo {
       margin: 0;
       width: 95%;
-      max-height: 85px;
       border-bottom: none;
     }
     .logo h1 {
@@ -2181,11 +2180,13 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 
 @media screen and (max-width: 2560px) {
         .dashboard-container {
-            margin-top: 30px
+            margin-top: 30px;
             background: rgba(143, 119, 119, 0.25);
             backdrop-filter: blur(2px);
         }
         .dashboard-container a {
+            color: rgba(126, 127, 128, 0.74);
+    text-shadow: 0 0 1px rgb(135 206 250 / 75%);
         }
         .widespread-center-logo {
             z-index: 250000;
@@ -2214,13 +2215,13 @@ input#toggle:checked ~ #show-menu .btn .closeBtn {
 
 
 </style>
-  <div class="user-background-image">
+<!--   <div class="user-background-image">
     <% if (profile.user_background_image) { %>
         <img src="<%= profile.user_background_image %>" alt="<%= profile.fname %> <%= profile.lname %>'s Avatar">
     <% } else { %>
             <div class="user-background-color" style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; background: <%= profile.favColor1 %>"></div>
     <% } %>
-</div>
+</div> -->
 
 <%- include('partials/mainHeaderSiteMenu') %>
 <div class="intro-message" data-title="Page Slider Menu" data-intro="Slide this menu left and right to access more features. SocialSpread, YourSpread, SpreadChat(Real-time text, audio, video chat), Tools(Notes, ToDo's, Encyclopedia, Dictionary, etc.), SpreadShield & FlexFloor.">
