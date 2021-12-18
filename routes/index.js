@@ -35,6 +35,7 @@ router.get('/', (req, res) => {
 const db = require('../config/keys').MongoURI;
 const UserBackgroundImage = require('../models/UserBackgroundImage');
 const { response } = require('express');
+const UserPhoto = require('../models/UserPhoto');
 const conn = mongoose.createConnection(db)
 let gfs;
 conn.once('open', () => {
@@ -193,12 +194,7 @@ conn.once('open', () => {
 
     router.get('/dashboard/wall', ensureAuthenticated, async (req, res) => {
       const id = req.user._id;
-      const resume = await Resume.find({ resumeOwner: { $eq: id } });
-      const article = await Article.find({ author: { $eq: id } });
       const thisUser = await User.findById(id);
-      /* const findUserAvatar = await profileImages[0]._id; */
-      
-      /* const userAvatar = await ProfileImage.find({ _id: { $eq: findUserAvatar } }); */
       const friendIds = req.user.friends;
       const posts = await Post.find({ "author": { "$in": friendIds } }).sort({createdAt: 'desc'}).populate('comments');
       
@@ -383,12 +379,14 @@ router.get('/:userId/friends', ensureAuthenticated, async (req, res) => {
   })
 
   router.get('/photo-album/:user/:albumId', ensureAuthenticated, async (req, res) => {
-    const user = req.params.user;
+    const userId = req.params.user;
     const albumId = req.params.albumId;
-    const thisUser = await User.findById(user);
+    const photos = await UserPhoto.find({"image_owner": {$eq: userId}})
+    const thisUser = await User.findById(userId);
     const photoAlbums = await PhotoAlbum.findById(albumId);
-    res.render('album', {photoAlbums, thisUser, albumId})
-  })
+    res.render('album', {photoAlbums, thisUser, albumId, photos})
+  });
+
   router.post('/photo-album', ensureAuthenticated, (req, res) => {
     const user = req.user.id;
     const photoAlbum = new PhotoAlbum({
@@ -401,14 +399,41 @@ router.get('/:userId/friends', ensureAuthenticated, async (req, res) => {
     photoAlbum.save()
 
     res.redirect(`/photo-album/${user}`);
-  })
+  });
+
+router.get('/photo-album/:userId/:albumId/edit', ensureAuthenticated, async (req, res) => {
+  const userId = req.params.userId;
+  const albumId = req.params.albumId;
+  const album = await PhotoAlbum.findById(albumId);
+  res.render('photo-album-edit', {album, userId});
+});
+
+router.patch('/photo-album/:userId/:albumId/edit', ensureAuthenticated, async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const albumId = req.params.albumId;
+    const updates = req.body;
+    const options = { new: true };
+    await PhotoAlbum.findByIdAndUpdate(albumId, updates, options);
+    res.redirect(`/photo-album/${userId}/${albumId}`)
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete('/photo-album/:userId/:albumId/delete', ensureAuthenticated, async (req, res) => {
+  const userId = req.params.userId;
+  const albumId = req.params.albumId;
+  await PhotoAlbum.findByIdAndDelete(albumId)
+  res.redirect(`/photo-album/${userId}`);
+})
 
   router.get('/polls', ensureAuthenticated, async(req, res) => {
     const allPolls = await Poll.find();
 
     res.render('all-polls', {allPolls});
   })
-  router.get('/socialspread', async (req, res) => {
+ /*  router.get('/socialspread', async (req, res) => {
     const thisUser = req.user._id;
     
     const userFriends = await User.findById(thisUser).populate('friends').exec()
@@ -442,7 +467,7 @@ router.get('/:userId/friends', ensureAuthenticated, async (req, res) => {
           res.render('socialspread-home', {currentPageTitle: 'SocialSpread', profile, userFriends, friendIds, avatars})
         )
 });
-
+ */
 
 
 

@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 const notebookSchema = new mongoose.Schema({ 
     notebookOwner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     forClass: {type: mongoose.Schema.Types.ObjectId, ref: 'Class'},
-    notebookName: {
-        type: String,
-        unique: true
-    },
+    notebookName: String,
     notebookDescription: String,
     notebookTags: [String],
     notebookColor: String,
@@ -15,6 +12,5 @@ const notebookSchema = new mongoose.Schema({
     notebookCreated: {type: Date, default: Date.now()}
 }); 
   
-//Notebook is a model which has a schema imageSchema 
   
 module.exports = new mongoose.model('Notebook', notebookSchema); 

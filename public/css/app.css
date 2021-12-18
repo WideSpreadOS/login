@@ -1,0 +1,189 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color: #fff;
+}
+
+
+
+body {
+    font-family: 'Play', sans-serif;
+}
+
+.mt-1 {
+    margin-top: 100px;
+}
+.mt-2 {
+    margin-top: 200px;
+}
+.mt-3 {
+    margin-top: 300px;
+}
+
+/* 
+
+                    WATCH SIZE
+
+*/
+@media (min-width: 50px) {
+
+}
+
+
+/* 
+
+                    CELL SIZE
+
+*/
+@media (min-width: 299px) {
+    .page-title {
+        margin-bottom: 10px;
+    }
+    .page-title h1 {
+        text-align: center;
+        padding: 10px;
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.75);
+        text-shadow: 0 0 3px rgba(135, 206, 250, 0.75);
+    }
+    .spread-form-container {
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.15));
+        border-top: outset 1px lightskyblue;
+        border-bottom: outset 1px lightskyblue;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .spread-form-header {
+        background: rgba(0, 0, 0, 0.3);
+        border-top: outset 2px lightskyblue;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .spread-form-header h1 {
+        text-align: center;
+        font-size: 1.5rem;
+        color: #fff;
+        padding: 8px;
+    }
+    .spread-form {
+        background: rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        border-bottom: outset 2px lightskyblue;
+    }
+    .spread-input-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    .spread-input-group label {
+        color: #fff;
+        margin-left: 8px;
+    }
+    .spread-input-group input {
+        color: #fff;
+        background: #000;
+        margin-right: 8px;
+        padding: 5px;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+    }
+    .spread-input-group input::placeholder {
+        color: lightskyblue;
+    }
+    .spread-form-button {
+        padding-top: 10px;    
+    }
+    .spread-form-button button {
+        width: 100%;
+        padding: 8px;
+        font-size: 1.5rem;
+        color: lightskyblue;
+        border: none;
+        outline: none;
+        background: transparent;
+        margin-top: 5px;
+    }
+}
+
+/* 
+
+                    TABLET SIZE
+
+*/
+@media (min-width: 768px) {
+
+}
+
+/* 
+
+                    LAPTOP SIZE
+
+*/
+@media (min-width: 992px) {
+
+}
+
+
+/* 
+
+                    TV SIZE
+
+*/
+@media (min-width: 1200px) {
+
+}

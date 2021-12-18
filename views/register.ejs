@@ -1,19 +1,9 @@
 <style>
   @media screen and (min-width: 1200px) {
-    .widespread-header {
-      text-align: center;
-      padding: 0;
-    }
-    .logo {
-      margin: 0;
-      width: 95%;
-    }
-    .logo h1 {
-      margin: 0;
-    }
+   
     .create-account {
       width: 80%;
-      margin-left: 10%
+      margin-left: 10%;
     }
     .create-account img {
       width: 300px;
@@ -26,10 +16,14 @@
       background: transparent;
       width: 80%;
       margin-left: 10%;
+      position: relative;
+      z-index: 1999;
     }
     .create-account-btns h1 {
       margin-bottom: 30px;
     }
+
+
     .login-input {
       box-shadow: none;
       background: rgba(255, 255, 255, 0.3);
@@ -60,18 +54,13 @@
 
   }
   @media screen and (max-width: 1199px) {
-    .widespread-header {
-      text-align: center;
-      padding: 0;
-    }
-    .logo {
-      margin: 0;
-      width: 95%;
-    }
-    .logo h1 {
-      margin: 0;
-    }
     .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -9991;
     }
     .video-background video {
       min-height: 100vh;
@@ -81,11 +70,10 @@
       min-width: 100vw;
     }
     .create-account {
-      width: 90%;
-      margin-left: 5%;
       box-shadow: none;
-      border-top: groove 2px lightskyblue;
-      border-bottom: groove 2px lightskyblue;
+      border-top: outset 2px lightskyblue;
+      border-bottom: outset 2px lightskyblue;
+      margin-top: 200px;
     }
     .create-account img {
       width: 300px;
@@ -101,6 +89,11 @@
       background: transparent;
       width: 100%;
       padding: 0;
+    }
+    .create-account-btns h1 {
+      font-size: 1.5rem;
+      text-align: center;
+
     }
     .create-account-btns a {
       border-radius: 8px;
@@ -126,80 +119,28 @@
       border-radius: 8px;
     }
     .form-container {
-      border-radius: 8px;
-      border-left: groove 1px lightskyblue;
-      border-right: groove 1px lightskyblue;
-      background: rgba(0, 0, 0, 0.3);
+      border-top: outset 2px lightskyblue;
+      border-bottom: outset 2px lightskyblue;
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(2px);
       padding-top: 10px;
       padding-bottom: 10px;
-      width: 90%;
-      margin-left: 5%;
-    }
-    .input-scroller {
-    }
-    small {
-      color: lightskyblue;
-    }
-    .input-group {
-      display: inline-flex;
-      width: 250px;
-      min-width: 250px;
-      margin-right: 20px;
-      padding-left: 20px;
-      padding: 10px;
     }
     .input-data {
-      width: 180px;
-    }
-    .input-data input {
-      width: 180px;
+      background: lime;
+      width: 90%;
+      margin-left: 5%;
+      margin-bottom: 5px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1.2rem;
       padding: 5px;
-      color: #000;
-      backdrop-filter: none;
     }
     .input-data input:focus {
       outline: none;
     }
-    .next-button {
-      width: 30px;
-      text-align: center;
-      padding-left: 10px;
-    }
-    .next-button p {
-      font-size: 2.5rem;
-      margin-bottom: 0;
-      background: none;
-      border: none;
-      box-shadow: none;
-    }
-    .next-button i {
-      animation: flash 5s infinite;
-      transition: ease-in 0.5s;
-    }
-    .next-button button {
-      animation: slowflash 5s infinite;
-    }
-    .next-button button {
-      background: rgba(0, 128, 0, 0.3);
-      border: none;
-      outline: none;
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-      border: groove 2px green;
-      border-right: none;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.75), inset 2px 0 4px rgba(255, 255, 255, 0.5);
-    }
-    @keyframes flash {
-      0%   {color: green;}
-      50%  {color: #fff;}
-      100% {color: green;}
-}
-    @keyframes slowflash {
-      0%   {color: green;}
-  50%  {color: #fff;}
-  100% {color: green;}
-  }
 }
 </style>
 <div class="inner-container" style="height: auto; margin-bottom: 500px; ">
@@ -211,8 +152,7 @@
         <!-- Space Particles - Video by <a href="https://pixabay.com/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5200">Tomislav Jakupec</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5200">Pixabay</a> -->
         <!-- Earth Particles - Video by <a href="https://pixabay.com/users/llensgraf-2065862/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=17235">Leif Lensgraf</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=17235">Pixabay</a> -->
 </div>
-  <div class="row mt-5">
-    <div class="create-account" style="margin-top: 45px;">
+<!--     <div class="create-account">
         <div class="text-center">
             <div class="create-account-btns">
               <h1>
@@ -221,8 +161,7 @@
         <%- include ('./partials/messages') %>
         <form action="/users/register" method="POST">
           <div class="form-container">
-          <small>Scroll right to advance to the next input</small>
-          <div class="input-scroller" style="display: inline-flex; width: 100%; overflow-x: scroll;">
+          <div class="input-scroller">
           <div class="input-group">
             <div class="input-data">
 
@@ -236,9 +175,7 @@
               value="<%= typeof name != 'undefined' ? fname : '' %>"
               />
             </div>
-            <div class="next-button">
-              <p><i class="fas fa-angle-double-right"></i></p>
-            </div>
+
           </div>
           <div class="input-group">
             <div class="input-data">
@@ -253,9 +190,7 @@
               value="<%= typeof name != 'undefined' ? lname : '' %>"
               />
             </div>
-            <div class="next-button">
-              <p><i class="fas fa-angle-double-right"></i></p>
-            </div>
+
           </div>
           <div class="input-group">
             <div class="input-data">
@@ -270,9 +205,7 @@
               value="<%= typeof email != 'undefined' ? email : '' %>"
               />
             </div>
-            <div class="next-button">
-              <p><i class="fas fa-angle-double-right"></i></p>
-            </div>
+
           </div>
           <div class="input-group">
             <div class="input-data">
@@ -287,9 +220,7 @@
               value="<%= typeof password != 'undefined' ? password : '' %>"
               />
             </div>
-            <div class="next-button">
-              <p><i class="fas fa-angle-double-right"></i></p>
-            </div>
+
           </div>
           <div class="input-group">
             <div class="input-data">
@@ -314,6 +245,42 @@
         <p class="lead mt-4">Have An Account? <a href="/users/login" style="color: lightskyblue; background: none; border: none;">Login</a></p>
       </div>
         </div>
+    </div> -->
+
+    <div class="spread-form-container mt-2">
+      <div class="spread-form-header">
+        <h1>Create Account</h1>
       </div>
+      <form action="/users/register" method="post">
+      <div class="spread-form">
+        <div class="spread-input-group">
+          <label for="fname">First Name</label>
+          <input type="text" name="fname" id="fname" placeholder="First Name">
+        </div>
+        <div class="spread-input-group">
+          <label for="lname">Last Name</label>
+          <input type="text" name="lname" id="lname" placeholder="Last Name">
+        </div>
+        <div class="spread-input-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" name="dob" id="dob">
+        </div>
+        <div class="spread-input-group">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" placeholder="Email">
+        </div>
+        <div class="spread-input-group">
+          <label for="password1">Password</label>
+          <input type="text" name="password1" id="password1" placeholder="Password">
+        </div>
+        <div class="spread-input-group">
+          <label for="password2">Confirm Password</label>
+          <input type="text" name="password2" id="password2" placeholder="Confirm Password">
+        </div>
+      </div>
+        <div class="spread-form-button">
+          <button type="submit">Register</button>
+        </div>
+    </form>
     </div>
   </div>

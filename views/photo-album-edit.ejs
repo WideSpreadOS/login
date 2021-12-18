@@ -1,0 +1,424 @@
+<style>
+    @media screen and (max-width: 500px) {
+        .photo-albums-container {
+            width: 100%;
+            overflow-y: scroll;
+        }
+
+        .photo-album-container {
+            width: 100%;
+            max-height: 500px;
+            margin-top: 20px;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .photo-preview-slider {
+            clear: both;
+
+
+        }
+
+        .photo-preview-slide {
+            min-width: 100%;
+            max-width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            display: inline-flex;
+            overflow-x: scroll;
+
+        }
+
+        .photos {
+            padding: 5px;
+            height: 210px;
+            width: 40%;
+
+        }
+
+        .photo {
+            margin-left: 15px;
+        }
+
+        .photo img {
+            max-width: 120px;
+            width: 120px;
+            max-height: 200px;
+            width: 120px;
+            margin-right: 10px;
+            border-radius: 8px;
+
+        }
+
+        .photo-album-image-form {
+            display: block;
+            background: rgba(255, 255, 255, 0.404);
+            backdrop-filter: blur(2px);
+            border-radius: 15px;
+            width: 80%;
+            margin-left: 10%;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 0 2px #000;
+        }
+
+        .custom-file-profile-image {}
+
+        .custom-file-profile-image-button {
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.404);
+            box-shadow: inset 0 0 10px 5px green;
+            border: none;
+            outline: none;
+            color: #fff;
+            width: 75%;
+            margin-left: 0 auto;
+            margin-bottom: 20px;
+            padding-left: 0;
+        }
+
+    }
+
+
+
+
+    .photo-album-container {
+        margin: 0 auto;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        width: 90%;
+        border-radius: 10px;
+    }
+
+    .photo-album-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.5);
+        border-bottom: outset 2px lightskyblue;
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .photo-album-title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .photo-album-header h4 {
+        padding: 10px;
+        font-size: 2rem;
+    }
+
+    .photo-album-header small {
+        padding: 10px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    .private {
+        color: red;
+    }
+
+    .photo-album-description {
+        padding: 10px;
+        color: #fff;
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .photos {
+        padding: 15px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .photo {
+        width: 300px;
+        max-width: 300px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .photo img {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    .photo-album-image-form form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border: outset 2px lightskyblue;
+    }
+
+    .custom-file-profile-image {
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+    }
+
+    .custom-file-label-choose-profile-image {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #fff;
+        width: 100%;
+        padding: 8px;
+    }
+
+    .photo-album-image-form button {
+        background: rgba(0, 255, 0, 0.5);
+        border: outset 2px lime;
+        padding: 8px;
+        border-radius: 5px;
+        color: #fff;
+        width: 100px;
+        cursor: pointer;
+    }
+
+
+    .album-options {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 8px;
+        border: outset 2px lightskyblue;
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .delete {
+        background: rgba(255, 0, 0, 0.5);
+    }
+
+    .album-options a {
+        padding: 8px;
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: #fff;
+        border: outset 2px lightskyblue;
+        border-radius: 5px;
+        transition: ease-in 0.3s;
+    }
+
+    .album-options a:hover {
+        background: rgba(0, 0, 0, 0.75);
+        color: lightskyblue;
+        transition: ease-in 0.3s;
+    }
+    .add-photo-form {
+        width: 50%;
+        margin: 0 auto;
+    }
+    .add-photo-form h3 {
+        font-size: 2rem;
+        border-bottom: outset 2px lightskyblue;
+        width: 100%;
+        text-align: center;
+        padding: 8px;
+    }
+    .add-photo-form form {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        border: outset 2px lightskyblue;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .custom-file-profile-image {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .custom-file-profile-image label {
+        text-align: left;
+        width: fit-content;
+    }
+    .custom-file-profile-image input {
+        width: 100%;
+    }
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+        width: 75%;
+    }
+    .input-group input {
+        width: 90%;
+        padding: 5px;
+        border-radius: 5px;
+        outline: none;
+        border: inset 1px lightskyblue;
+    }
+    .input-group p {
+        text-align: center;
+        font-size: 1.3rem;
+        color: #fff;
+        padding: 5px;
+    }
+    .tags {
+        width: 90%;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    .input-group-tags {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .input-group-tags input {
+        border-radius: 5px;
+        padding: 5px;
+        outline: none;
+        border: inset 1px lightskyblue;
+    }
+    .tags p {
+        font-size: 1.3rem;
+        color: #fff;
+        display: block;
+        text-align: center;
+        width: 100%;
+        padding: 5px;
+    }
+    .custom-file-profile-image-button {
+        width: 100px;
+        background: rgba(0, 255, 0, 0.5);
+        border: outset 2px lime;
+        outline: none;
+        padding: 8px;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+</style>
+
+
+
+<div class="photo-album-container" style="background: <%= album.album_color %>;">
+    <div class="photo-album-header">
+        <div class="photo-album-title">
+            <h4>
+                <%= album.album_name %>
+            </h4>
+            <% if (album.private===true) { %>
+                <small class="private">Private</small>
+                <% } else { %>
+                    <small>Public</small>
+                    <% } %>
+        </div>
+        <div class="photo-album-description">
+            <p>
+                <%= album.album_description %>
+            </p>
+        </div>
+    </div>
+    <div class="photo-preview-slider">
+        <div class="photo-preview-slide">
+            <% if(!album.photos) { %>
+                <div class="photo-album-image-form">
+
+                    <form action="/upload-to-album/<%= albumId %>" method="post" enctype="multipart/form-data">
+                        <input type="text" name="albumOwner" id="albumOwner" style="display: none;" value="">
+                        <div class="custom-file-profile-image">
+                            <input type="file" name="photos" id="photos">
+                            <label for="photos" class="custom-file-label-choose-profile-image">Upload an Image</label>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="custom-file-profile-image-button">Add</button>
+                        </div>
+                    </form>
+                </div>
+                <% } else { %>
+                    <div class="photos">
+                        <% album.photos.forEach(function(photo) { %>
+                            <div class="photo">
+                                <img src="/image/<%= photo %>" alt="">
+                                <div class="photo-options">
+                                    <a href="/photo/delete">Delete</a>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+        </div>
+    </div>
+    <% } %>
+
+        <div class="add-photo-form">
+            <form action="/upload-photo" method="post" enctype="multipart/form-data">
+                <h3>Add a Photo</h3>
+                <input type="text" name="image_owner" id="imageOwner" style="display: none;" value="<%= userId %>">
+                <div class="custom-file-profile-image">
+                    <label for="photo" class="custom-file-label-choose-profile-image">Choose Photo</label>
+                    <input type="file" name="photo" id="photo">
+                </div>
+                <div class="input-group">
+                    <p>Caption</p>
+                    <input type="text" name="caption" placeholder="Describe your photo">
+                </div>
+                <div class="input-group">
+                    <p>Location</p>
+                    <input type="text" name="location" placeholder="Location">
+                </div>
+                <div class="tags">
+                    <p>Tags</p>
+                    <div class="input-group-tags">
+                        <input type="text" name="tags">
+                        <input type="text" name="tags">
+                        <input type="text" name="tags">
+                    </div>
+                </div>
+                <button type="submit" class="custom-file-profile-image-button">Add</button>
+            </form>
+        </div>
+        <div class="photo-album-image-form">
+
+            <form action="/upload-to-album/<%= userId %>/<%= album.id %>" method="post"
+                enctype="multipart/form-data">
+                <input type="text" name="albumOwner" id="albumOwner" style="display: none;" value="<%= userId  %>">
+                <div class="custom-file-profile-image">
+                    <label for="photos" class="custom-file-label-choose-profile-image">Upload an Image</label>
+                    <input type="file" name="photos" id="photos">
+                </div>
+
+                <div>
+                    <button type="submit" class="custom-file-profile-image-button">Add</button>
+                </div>
+            </form>
+        </div>
+</div>
+
+
+<div class="album-options">
+    <a href="/photo-album/<%= userId %>/<%= album.id %>/delete" class="delete">Delete Album</a>
+</div>

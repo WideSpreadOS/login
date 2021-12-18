@@ -1,0 +1,46 @@
+<style>
+    .article-container {
+        margin-bottom: 10px;
+    }
+    .article-image {
+        width: 100%;
+    }
+    .article-image img {
+        width: 100%;
+    }
+    h6 {
+        color: lightskyblue;
+        font-size: 1.3rem;
+        padding: 8px;
+        background: rgba(51, 51, 51, 0.75);
+        border-top: outset 2px lightskyblue;
+    }
+    p {
+        color: #fff;
+        margin-bottom: 10px;
+        padding: 5px;
+        background: rgba(51, 51, 51, 0.5);
+        border-top: solid 1px rgba(135, 206, 250, 0.5);
+        border-bottom: outset 2px lightskyblue;
+    }
+</style>
+
+
+<form action="/news/search" method="post">
+    <input type="search" name="searchQuery" placeholder="Search for articles...">
+    <button type="submit">Search</button>
+</form>
+
+<% returnedData.articles.forEach(function(article) { %>
+    <div class="article-container">
+        <% if (article.media != 'NULL') { %>
+            <div class="article-image">
+                <img src="<%= article.media %>" alt="">
+            </div>
+        <% } else { %>
+            <span></span>
+        <% } %>
+        <h6><%= article.title %></h6>
+        <p><%= article.summary %></p>   
+    </div>
+<% }) %>

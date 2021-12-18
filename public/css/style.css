@@ -31,6 +31,7 @@ footer, header, hgroup, menu, nav, section {
 body {
     font-size:1.6rem;
     font-family: 'Roboto Mono', monospace;
+    
     line-height:1.5;
 }
 ol, ul {
@@ -50,7 +51,6 @@ table {
 }
 
 h1{
-    font-family: 'Chelsea Market', cursive;
     font-size: 5rem;
 }
 section{
@@ -75,13 +75,7 @@ nav a{
 /* Billboard */
 
 .billboard {
-   background: lightskyblue;
-   background-image:url('https://www.yourtownmonthly.com/wp-content/uploads/2019/08/Daycation-Yosemite.png');
-   background-repeat:no-repeat;
-   background-size:cover;
-   background-position:center top;
-   height:50vh;
-   width:100%;
+
 }
 
 
@@ -177,7 +171,12 @@ body {
 }
 
 .input-group input {
-    color: #000;
+    color: lightskyblue;
+}
+.input-group input:hover {
+    background: rgba(135, 206, 250, 0.5);
+    box-shadow: inset 0 0 10px #fff;
+    backdrop-filter: blur(4px);
 }
 .form-group input {
     color: #000;
@@ -2099,7 +2098,7 @@ h1,h2,h3,h4,h5,h6 {
 .card-body {
     margin: 0 auto;
     background: lime;
-    
+
 }
 
 

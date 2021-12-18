@@ -5,6 +5,96 @@
   input::placeholder {
     color: #fff;
   }
+  
+  @media screen and (min-width: 299px) {
+      .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -9990;
+      }  
+      .create-account {
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.15));
+        backdrop-filter: blur(4px);
+        border-top: outset 1px lightskyblue;
+        border-bottom: outset 1px lightskyblue;
+        position: absolute;
+        width: 100%;
+        top: 200px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.75);
+      }
+      .create-account-header {
+        background: rgba(0, 0, 0, 0.3);
+        border-top: outset 2px lightskyblue;
+        border-bottom: outset 2px lightskyblue;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .create-account h1 {
+        text-align: center;
+        padding: 8px;
+        font-size: 1.5rem;
+      }
+      .create-account h5 {
+        text-align: center;
+        padding: 8px;
+        font-size: 1.2rem;
+      }
+      .create-account-btn {
+        border: outset 2px lightskyblue;
+        width: 50%;
+        padding: 10px;
+      }
+      .create-account-btn:first-of-type {
+        border-left: none;
+        border-right: outset 1px lightskyblue;
+      }
+      .create-account-btn:last-of-type {
+        border-right: none;
+        border-left: outset 1px lightskyblue;
+      }
+      .create-account-btn h6 {
+        text-align: center;
+
+      }  
+      .create-account-btns {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 15px;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.75);
+      }
+      .create-account-btns h6 {
+        width: 100%;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+      .create-account-btns a {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  
+  @media screen and (min-width: 768px) {
+        .main-spread-menu {
+            display: none;
+        }
+    }
+  @media screen and (min-width: 992px) {
+        .main-spread-menu {
+            display: none;
+        }
+    }
+
+
   @media screen and (min-width: 1200px) {
         body {
           background: #000;
@@ -31,8 +121,8 @@
           background: rgba(135, 206, 250, 0.3);
           backdrop-filter: blur(2px);
           padding-bottom: 20px;
-          border-top: groove 2px lightskyblue;
-          border-bottom: groove 2px lightskyblue;
+          border-top: outset 2px lightskyblue;
+          border-bottom: outset 2px lightskyblue;
           box-shadow: 0 6px 6px 3px rgba(0, 0, 0, 0.5);
         }
        
@@ -68,8 +158,8 @@
           text-align: center;
           background: rgba(0, 0, 0, 0.3);
           color: #fff;
-          border-top: groove 2px lightskyblue;
-          border-bottom: groove 2px lightskyblue;
+          border-top: outset 2px lightskyblue;
+          border-bottom: outset 2px lightskyblue;
 
         }
         .create-account-btns {
@@ -84,6 +174,7 @@
           text-align: center;
           padding: 20px;
         }
+
         .create-account-btns h6 {
           width: 40%;
           margin-left: 5%;
@@ -107,17 +198,6 @@
     }
 
 
-@media screen and (max-width: 1199px) {
-        .main-spread-menu {
-            display: none;
-        }
-    }
-
-
-@media screen and (max-width: 500px) {
-
-    }
-
 </style>
 
 
@@ -129,10 +209,7 @@
     <source src="/videos/space-particles_1a1a1a.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
-    <!-- Space Particles - Video by <a href="https://pixabay.com/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5200">Tomislav Jakupec</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5200">Pixabay</a> -->
-    <!-- Earth Particles - Video by <a href="https://pixabay.com/users/llensgraf-2065862/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=17235">Leif Lensgraf</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=17235">Pixabay</a> -->
 </div>
-
 
 
 <!-- Main Spread Window -->
@@ -142,11 +219,17 @@
 
     <!-- Create Account -->
     <div class="create-account">
-      <h1>Welcome to WideSpread</h1>
-      <h5>Create an account or login</h5>
+      <div class="create-account-header">
+        <h1>Welcome to WideSpread</h1>
+        <h5>Create an account or login</h5>
+      </div>
       <div class="create-account-btns">
-        <h6><a href="/users/login">Login</a></h6>
-        <h6><a href="/users/register">Register</a></h6>
+        <div class="create-account-btn">
+          <h6><a href="/users/login">Login</a></h6>
+        </div>
+        <div class="create-account-btn">
+          <h6><a href="/users/register">Register</a></h6>
+        </div>
       </div>
     </div>
   </div>
@@ -154,43 +237,3 @@
 
 
 
-
-
-<script>
-    function openModal() {
-      document.getElementById("myModal").style.display = "block";
-    }
-    
-    function closeModal() {
-      document.getElementById("myModal").style.display = "none";
-    }
-    
-    var slideIndex = 1;
-    showSlides(slideIndex);
-    
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
-    
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
-    
-    function showSlides(n) {
-      var i;
-      var slides = document.getElementsByClassName("mySlides");
-      var dots = document.getElementsByClassName("demo");
-      var captionText = document.getElementById("caption");
-      if (n > slides.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-      captionText.innerHTML = dots[slideIndex-1].alt;
-    }
-    </script>

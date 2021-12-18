@@ -1,19 +1,18 @@
 const mongoose = require('mongoose'); 
   
 const noteSchema = new mongoose.Schema({ 
-    noteFrom: {type: mongoose.Schema.Types.ObjectId, ref: 'NoteCollection'},
-    noteTitle: {
+    notebook_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Notebook'},
+    note_from: {type: mongoose.Schema.Types.ObjectId, ref: 'NotebookSection'},
+    note_title: {
         type: String,
         unique: true
     },
-    noteCategory: String,
-    noteTags: [String],
-    noteColor: String,
-    noteImages: [String],
-    noteBody: String,
-    noteReferences: [String],
+    note_tags: [String],
+    note_images: [String],
+    note_body: String,
+    note_references: [String],
     flashcards: [{type: mongoose.Schema.Types.ObjectId, ref: 'Flashcard'}],
-    noteCreated: {type: Date, default: Date.now()}
+    note_created: {type: Date, default: Date.now()}
 }); 
   
   

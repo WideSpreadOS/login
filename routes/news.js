@@ -13,27 +13,50 @@ const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
 router.get('/', (req, res) => {
 
-axios.get("https://www.oann.com/category/newsroom/").then(function(response) {
-        const $ = cheerio.load(response.data);
-        const results = [];
+    var options = {
+        method: 'GET',
+        url: 'https://newscatcher.p.rapidapi.com/v1/sources',
+        params: { lang: 'en' },
+        headers: {
+            'x-rapidapi-host': 'newscatcher.p.rapidapi.com',
+            'x-rapidapi-key': '7e45ec5e4fmsh4f3dac417f9eaa7p179a33jsnbfe4cb2e4c79'
+        }
+    };
 
-        $('.archive-grid').children('article').each(function(i, element) {
-
-        const title = $(element).children('.content-grid-title').children('a').text();
-        const articleImage = $(element).children('.content-grid-thumb').children('a').children('img').attr('src');
-        const articleImageAlt = $(element).children('.content-grid-thumb').children('a').attr('title');
-        const link = $(element).children('.content-grid-title').children('a').attr('href');
-
-        results.push({
-            title: title,
-            articleImage: articleImage,
-            articleImageAlt: articleImageAlt,
-            link: link,
-    });
-        });
-        res.render('news-home', {currentPageTitle: 'News', results});
+    axios.request(options).then(function (response) {
+        console.log(response.data);
+        const returnedData = response.data;
+        res.render('news-home', {returnedData})
+    }).catch(function (error) {
+        console.error(error);
     });
 });
+
+router.post('/search', (req, res) => {
+    const term = req.body.searchQuery;
+    res.redirect(`/news/search/${term}`);
+});
+
+router.get('/search/:searchTerm', (req, res) => {
+    const searchTerm = req.params.searchTerm
+    var options = {
+        method: 'GET',
+        url: 'https://newscatcher.p.rapidapi.com/v1/search_free',
+        params: { q: `${searchTerm}`, lang: 'en', media: 'True' },
+        headers: {
+            'x-rapidapi-host': 'newscatcher.p.rapidapi.com',
+            'x-rapidapi-key': '7e45ec5e4fmsh4f3dac417f9eaa7p179a33jsnbfe4cb2e4c79'
+        }
+    };
+
+    axios.request(options).then(function (response) {
+        console.log(response.data);
+        const returnedData = response.data;
+        res.render('news-search-results', {returnedData})
+    }).catch(function (error) {
+        console.error(error);
+    });
+})
 router.get('/international', (req, res) => {
     const country = 'U.S.';
 
@@ -236,6 +259,8 @@ router.get('/weather', ensureAuthenticated, async (req, res) => {
     res.render('weather-home', {weather, forecast});
 });
 
+
+module.exports = router;
 
 /* 
 

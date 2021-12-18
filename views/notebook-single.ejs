@@ -1,0 +1,348 @@
+<style>
+    .notebook-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -99996;
+    }
+    .notebook-menu {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        width: 100%;
+        text-align: center;
+    }
+    .notebook-options {
+        background: rgba(255, 255, 255, 0.5);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        margin-left: 25%;
+        padding: 8px;
+        border-radius: 4px;
+    }
+    .notebook-options button {
+        background: none;
+        border: none;
+        outline: none;
+        color: red;
+    }
+    .notebook-options a {
+        text-decoration: none;
+        color: green;
+        width: 50%;
+    }
+    .notebook-menu a {
+        text-decoration: none;
+        font-size: 1rem;
+        color: lightskyblue;
+    }
+    .notebook-title {
+        padding: 20px;
+    }
+    .notebook-title h2 {
+        text-align: center;
+        font-size: 2rem;
+    }
+    .notebook-title h6 {
+        text-align: center;
+        font-size: 1rem;
+    }
+    .notebook-tags {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .notebook-tag {
+        background: rgba(255, 255, 255, 0.5);
+        padding: 8px;
+        color: #000;
+        font-weight: bolder;
+        border-radius: 5px;
+    }
+    .section-form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.5);
+        width: 50%;
+        margin-left: 25%;
+        padding-top: 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border-radius: 8px;
+    }
+    .section-form h4 {
+        text-align: center;
+        margin-top: 15px;
+    }
+    .section-form input {
+        width: 90%;
+        margin-left: 5%;
+        padding: 5px;
+        margin-top: 10px;
+        border-radius: 8px;
+    }
+    
+    .section-form textarea {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 10px;
+        padding: 5px;
+        border-radius: 8px;
+    }
+    .section-form button {
+        width: 90%;
+        margin-left: 5%;
+        padding: 10px;
+        background: green;
+        border: groove 2px green;
+        border-bottom: none;
+        color: #fff;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+    h5 {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        width: 100%;
+    }
+    input {
+        width: 80%;
+        margin-bottom: 10px;
+
+    }
+    .colors {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content:space-around;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 80%;
+    }
+    .color {
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        border: outset 1px #000;
+    }
+
+    .red {
+        background: rgba(255, 0, 0, 0.75);
+    }
+    .dark-blue {
+        background: #3300b2;
+    }
+    .blue {
+        background: rgba(0, 0, 255, 0.75);
+    }
+    .light-blue {
+        background: #497df2;
+    }
+    .teal {
+        background: #49e9f2;
+    }
+    .green {
+        background: rgba(0, 128, 0, 0.75);
+    }
+    .lime {
+        background: #5ED928;
+    }
+    .yellow {
+        background: rgba(255, 255, 0, 0.75);
+    }
+    .pink {
+        background: #ee82ee;
+    }
+    .peach {
+        background: #ffceb2;
+    }
+    .orange {
+        background: #ffa500;
+    }
+    .gold {
+        background: #ffc900;
+    }
+    .purple {
+        background: #6a5acd;
+    }
+    .dark-purple {
+        background: #98009c;
+    }
+    .brick {
+        background: #aa3720;
+    }
+    .tan {
+        background: #aa8620;
+    }
+    .silver {
+        background: #888;
+    }
+    .grey {
+        background: #444;
+    }
+    .black {
+        background: #111;
+    }
+    .sections {
+        width: 80%;
+        margin-left: 10%;
+    }
+    .section {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 4px;
+    }
+    .section a {
+        text-decoration: none;
+        font-size: 1.5rem;
+        text-shadow: 0 0 2px #000;
+    }
+    .section-tags {
+        display: flex;    
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .section-tags input {
+        width: 30%;
+    }
+</style>
+<div class="notebook-background" style="background: <%= notebook.notebookColor %>;"></div>
+<div class="notebook-menu">
+    <a href="/notebooks">Back to Notebooks</a>
+</div>
+<div class="notebook-options">
+    <form action="/notebooks/<%= notebook.id %>?_method=DELETE" method="post">
+        <input type="text" name="notebook_id" value="<%= notebook.id %>" hidden>
+        <button type="submit">Delete</button>
+    </form>
+    <a href="/notebooks/<%= notebook.id %>/edit">Edit</a>
+</div>
+<div class="notebook-title">
+    <h2><%= notebook.notebookName %></h2>
+    <div class="notebook-tags">
+        <% notebook.notebookTags.forEach(function(tag) { %>
+            <% if(tag != '') { %>
+                <div class="notebook-tag">
+                    <%= tag %>
+                </div>
+            <% } else { %>
+                <span style="display: none;"></span>
+            <% } %>
+        <% }) %>
+    </div>
+</div>
+<div class="section-form">
+    <h5>Add New Section</h5>
+    <form action="/notebooks/<%= notebook.id %>/new/section" method="post">
+        <input type="text" name="section_title" placeholder="Section Name">
+        <input type="text" name="section_category" placeholder="Section Category">
+        <h4>Choose Section Color</h4>
+        <h6>(Default: White)</h6>
+        <div class="colors">
+            <div class="color red">
+                <input type="radio" name="section_color" value="#ff0000">Red
+            </div>
+            <div class="color dark-blue">
+                <input type="radio" name="section_color" value="#3300b2">Navy
+            </div>
+            <div class="color blue">
+                <input type="radio" name="section_color" value="#0000ff">Blue
+            </div>
+            <div class="color light-blue">
+                <input type="radio" name="section_color" value="#497df2">Cobalt
+            </div>
+            <div class="color teal">
+                <input type="radio" name="section_color" value="#49e9f2">Teal
+            </div>
+            <div class="color green">
+                <input type="radio" name="section_color" value="#3cb371">Green
+            </div>
+            <div class="color lime">
+                <input type="radio" name="section_color" value="#5ED928">Lime
+            </div>
+            <div class="color yellow">
+                <input type="radio" name="section_color" value="#ffde00">Yellow
+            </div>
+            <div class="color pink">
+                <input type="radio" name="section_color" value="#ee82ee">Pink
+            </div>
+            <div class="color peach">
+                <input type="radio" name="section_color" value="#ffceb2">Peach
+            </div>
+            <div class="color orange">
+                <input type="radio" name="section_color" value="#ffa500">Orange
+            </div>
+            <div class="color gold">
+                <input type="radio" name="section_color" value="#ffc900">Gold
+            </div>
+            <div class="color purple">
+                <input type="radio" name="section_color" value="#6a5acd">Purple
+            </div>
+            <div class="color dark-purple">
+                <input type="radio" name="section_color" value="#98009c">Dark Purple
+            </div>
+            <div class="color brick">
+                <input type="radio" name="section_color" value="#aa3720">Brick
+            </div>
+            <div class="color tan">
+                <input type="radio" name="section_color" value="#aa8620">Tan
+            </div>
+            <div class="color silver">
+                <input type="radio" name="section_color" value="#888">Silver
+            </div>
+            <div class="color grey">
+                <input type="radio" name="section_color" value="#444">Grey
+            </div>
+            <div class="color black">
+                <input type="radio" name="section_color" value="#111">Black
+            </div>
+        </div>
+        <h4>Add Section Tags</h4>
+        <div class="section-tags">
+            <input type="text" name="section_tags" placeholder="Add a Tag">
+            <input type="text" name="section_tags" placeholder="Add a Tag">
+            <input type="text" name="section_tags" placeholder="Add a Tag">
+            <input type="text" name="section_tags" placeholder="Add a Tag">
+        </div>
+        <button type="submit">Add Section</button>
+    </form>
+</div>
+
+
+<% if(sections) { %>
+    <div class="sections">
+        <% sections.forEach(function(section) { %>
+            <div class="section" style="background: <%= section.section_color %>;">
+                <a href="<%= section.section_from %>/section/<%= section.id %>">    
+                    <h6><%= section.section_title %></h6>
+                </a>
+            </div>
+        <% }) %>
+    </div>
+<% } else { %>
+    <span></span>
+<% } %>
+

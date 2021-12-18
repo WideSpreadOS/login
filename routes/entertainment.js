@@ -3,9 +3,9 @@ const router = express.Router();
 const {ensureAuthenticated } = require('../config/auth');
 const mongoose = require('mongoose');
 const axios = require('axios');
-const User = require('../models/User');
 const Movie = require('../models/Movie');
 const Show = require('../models/Show');
+const User = require('../models/User');
 const UserVideo = require('../models/UserVideo');
 const Mux = require('@mux/mux-node');
 const { Video } = new Mux(process.env.MUX_TOKEN_ID, process.env.MUX_TOKEN_SECRET);
@@ -13,6 +13,7 @@ const upChunk = require('@mux/upchunk');
 const { json, send } = require('micro');
 const uuid = require('uuid');
 const fs = require('fs');
+const UserAudio = require('../models/UserAudio');
 
 
 
@@ -21,7 +22,7 @@ const fs = require('fs');
 
 router.get('/', async (req, res) => {
     const movies = await Movie.find()
-
+    const shows = await Show.find()
     const apiKey = process.env.TMDB_API_KEY
     const options = {
       method: 'GET',
@@ -30,8 +31,7 @@ router.get('/', async (req, res) => {
 
     axios.request(options).then(function (response) {
       const returnedData = response.data;
-      //console.log(returnedData)
-      res.render('ent-home', { returnedData, movies});
+      res.render('ent-home', { returnedData, movies, shows});
     }).catch(function (error) {
       console.error(error);
     });
@@ -75,11 +75,28 @@ router.get('/kids/movies', async (req, res) => {
 });
 
 router.post('/movies/search', (req, res) => {
-    const movie = req.body.movie;
     const movieString = req.body.movie;
     const convertedString = movieString.replace(/\s/g, '+')
-    res.redirect(`/entertainment/movies/${convertedString}`);
-})
+    res.redirect(`/entertainment/search/movies/${convertedString}`);
+});
+ 
+router.get('/search/movies/:query', (req, res) => {
+  const query = req.params.query;
+  const apiKey = 'd3722e71'
+  const options = {
+    method: 'GET',
+    url: `http://www.omdbapi.com/?apikey=${apiKey}&s=${query}`
+  };
+
+  axios.request(options).then(function (response) {
+    const returnedData = response.data;
+    console.log(returnedData)
+    res.render('ent-movie-search-results', { returnedData, query });
+  }).catch(function (error) {
+    console.error(error);
+  });
+});
+
 router.get('/movies/:movie', (req, res) => {
     const movie = req.params.movie;
     const apiKey = 'd3722e71'
@@ -90,7 +107,7 @@ router.get('/movies/:movie', (req, res) => {
 
 axios.request(options).then(function (response) {
     const returnedData = response.data;
-
+    console.log(returnedData)
     res.render('ent-movie-info', {returnedData, movie});
   }).catch(function (error) {
     console.error(error);
@@ -103,39 +120,61 @@ axios.request(options).then(function (response) {
 
 
 router.get('/movies/:movie/vr', async (req, res) => {
-    const movie = req.params.movie;
-
-    const apiKey = 'd3722e71'
+  const movie = req.params.movie;
+  const apiKey = 'd3722e71'
 	const options = {
-  method: 'GET',
-  url: `http://www.omdbapi.com/?apikey=${apiKey}&t=${movie}`
-};
+    method: 'GET',
+    url: `http://www.omdbapi.com/?apikey=${apiKey}&t=${movie}`
+  };
 
-axios.request(options).then(function (response) {
-    const returnedData = response.data;
-
-    res.render('ent-movie-info-vr', {layout: './layouts/vr-ar', returnedData, movie});
-}).catch(function (error) {
-	console.error(error);
+  axios.request(options).then(function (response) {
+      const returnedData = response.data;
+      res.render('ent-movie-info-vr', {layout: './layouts/vr-ar', returnedData, movie});
+  }).catch(function (error) {
+    console.error(error);
+  });
 });
-})
+
+
 router.get('/movies/:movie/spreadshield', async (req, res) => {
     const movie = req.params.movie;
 
     const apiKey = 'd3722e71'
 	const options = {
-  method: 'GET',
-  url: `http://www.omdbapi.com/?apikey=${apiKey}&t=${movie}`
-};
+    method: 'GET',
+    url: `http://www.omdbapi.com/?apikey=${apiKey}&t=${movie}`
+  };
 
-axios.request(options).then(function (response) {
-    const returnedData = response.data;
+  axios.request(options).then(function (response) {
+      const returnedData = response.data;
 
-    res.render('ent-movie-info-spreadshield', {returnedData, movie});
-}).catch(function (error) {
-	console.error(error);
+      res.render('ent-movie-info-spreadshield', {returnedData, movie});
+  }).catch(function (error) {
+    console.error(error);
+  });
 });
-})
+
+router.get('/photos/movies/:imdbID', (req, res) => {
+  const imdbID = req.params.imdbID;
+
+  var options = {
+    method: 'GET',
+    url: 'https://imdb8.p.rapidapi.com/title/get-all-images',
+    params: { tconst: imdbID },
+    headers: {
+      'x-rapidapi-host': 'imdb8.p.rapidapi.com',
+      'x-rapidapi-key': '7e45ec5e4fmsh4f3dac417f9eaa7p179a33jsnbfe4cb2e4c79'
+    }
+  };
+
+  axios.request(options).then(function (response) {
+    console.log(response.data);
+    const returnedData = response.data;
+    res.render('ent-movie-info-photos', {returnedData})
+  }).catch(function (error) {
+    console.error(error);
+  });
+});
 
 router.post('/movies/save', ensureAuthenticated, async (req, res) => {
     const user = req.user._id;
@@ -165,25 +204,29 @@ router.post('/movies/add-to-recommended', ensureAuthenticated, (req, res) => {
 })
 
 router.get('/tv', async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
   const tvShow = await Show.find();
-  const userShows = await User.findById(userId).select('user_shows');
-
   const apiKey = process.env.TMDB_API_KEY
 	const options = {
   method: 'GET',
   url: `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}`
-};
+  };
 
-axios.request(options).then(function (response) {
-    const returnedData = response.data;
-    console.log(returnedData)
-    res.render('ent-tv-home', {returnedData, user, tvShow, userShows});
-}).catch(function (error) {
-	console.error(error);
+  axios.request(options).then(function (response) {
+      const returnedData = response.data;
+      res.render('ent-tv-home', {returnedData, tvShow });
+  }).catch(function (error) {
+    console.error(error);
+  });
+
 });
 
+router.get('/tv/user', async (req, res) => {
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+  const tvShow = await Show.find();
+  const userShows = await User.findById(userId).select('user_shows');
+  console.log(user)
+  res.render('ent-tv-user', { user, tvShow, userShows });
 });
 
 router.post('/tv/save', ensureAuthenticated, async (req, res) => {
@@ -208,111 +251,112 @@ router.post('/tv/add-to-recommended', ensureAuthenticated, (req, res) => {
       poster: req.body.poster,
   })
   show.save()
-
   res.redirect('/entertainment/tv');
-
 });
 
 
 router.post('/tv/search', (req, res) => {
-  const show = req.body.show
-
+  const show = req.body.show;
   res.redirect(`/entertainment/tv/search/${show}`);
 
 });
 
 
 router.get('/tv/search/:show', async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
     const show = req.params.show;
-
     const apiKey = process.env.TMDB_API_KEY
-	const options = {
-  method: 'GET',
-  url: `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&language=en-US&page=1&include_adult=false&query=${show}`
-};
+    const options = {
+    method: 'GET',
+    url: `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&language=en-US&page=1&include_adult=false&query=${show}`
+  };
 
-axios.request(options).then(function (response) {
-    const returnedData = response.data;
-    console.log(returnedData)
-    res.render('ent-tv-search-results', {returnedData, show});
-}).catch(function (error) {
-	console.error(error);
-});
+  axios.request(options).then(function (response) {
+      const returnedData = response.data;
+      res.render('ent-tv-search-results', {returnedData, show});
+  }).catch(function (error) {
+    console.error(error);
+  });
 
 });
 
 router.get('/tv/:showId', async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
     const showId = req.params.showId;
-
     const apiKey = process.env.TMDB_API_KEY
-	const options = {
-  method: 'GET',
-  url: `https://api.themoviedb.org/3/tv/${showId}?api_key=${apiKey}`
-};
+    const options = {
+    method: 'GET',
+    url: `https://api.themoviedb.org/3/tv/${showId}?api_key=${apiKey}`
+  };
 
-axios.request(options).then(function (response) {
-    const returnedData = response.data;
-    console.log(returnedData)
-    res.render('ent-tv-show', {returnedData, showId});
-}).catch(function (error) {
-	console.error(error);
-});
+  axios.request(options).then(function (response) {
+      const returnedData = response.data;
+      res.render('ent-tv-show', {returnedData, showId});
+  }).catch(function (error) {
+    console.error(error);
+  });
 
 })
 
 router.get('/tv/:showId/:seasonId', async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
   const showId = req.params.showId;
   const seasonId = req.params.seasonId;
-
-    const apiKey = process.env.TMDB_API_KEY
+  const apiKey = process.env.TMDB_API_KEY
 	const options = {
-  method: 'GET',
-  url: `https://api.themoviedb.org/3/tv/${showId}/season/${seasonId}?api_key=${apiKey}`
-};
+    method: 'GET',
+    url: `https://api.themoviedb.org/3/tv/${showId}/season/${seasonId}?api_key=${apiKey}`
+  };
 
-axios.request(options).then(function (response) {
-    const returnedData = response.data;
-    console.log(returnedData)
-    res.render('ent-tv-show-season', {returnedData, showId});
-}).catch(function (error) {
-	console.error(error);
-});
+  axios.request(options).then(function (response) {
+      const returnedData = response.data;
+      console.log(returnedData)
+      res.render('ent-tv-show-season', {returnedData, showId});
+  }).catch(function (error) {
+    console.error(error);
+  });
 
 })
 
 router.get('/tv/:showId/:seasonId/:episodeId', async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
   const showId = req.params.showId;
   const seasonId = req.params.seasonId;
   const episodeId = req.params.episodeId;
-
-    const apiKey = process.env.TMDB_API_KEY
+  const apiKey = process.env.TMDB_API_KEY
 	const options = {
-  method: 'GET',
-  url: `https://api.themoviedb.org/3/tv/${showId}/season/${seasonId}/episode/${episodeId}?api_key=${apiKey}`
-};
+    method: 'GET',
+    url: `https://api.themoviedb.org/3/tv/${showId}/season/${seasonId}/episode/${episodeId}?api_key=${apiKey}`
+  };
 
-axios.request(options).then(function (response) {
-    const returnedData = response.data;
-    console.log(returnedData)
-    res.render('ent-tv-show-episode', {returnedData, showId});
-}).catch(function (error) {
-	console.error(error);
+  axios.request(options).then(function (response) {
+      const returnedData = response.data;
+      console.log(returnedData)
+      res.render('ent-tv-show-episode', {returnedData, showId});
+  }).catch(function (error) {
+    console.error(error);
+  });
 });
 
-})
 
+router.get('/similar/tv/:showId', async (req, res) => {
+  const showId = req.params.showId;
+  const apiKey = process.env.TMDB_API_KEY
+  const options = {
+    method: 'GET',
+    url: `https://api.themoviedb.org/3/tv/${showId}/recommendations?api_key=${apiKey}&language=en-US&page=1`
+  };
+
+  axios.request(options).then(function (response) {
+    const returnedData = response.data;
+    console.log(returnedData)
+    res.render('ent-tv-show-similar', { returnedData, showId });
+  }).catch(function (error) {
+    console.error(error);
+  });
+});
+
+
+/* Videos - User Uploads & Streaming */
 
 router.get('/videos', async (req, res) => {
     const userId = req.user._id;
-
     const user =  await User.findById(userId);
 
     res.render('ent-videos', {user});
@@ -416,31 +460,71 @@ router.get('/videos/:userId/upload-done', async (req, res) => {
   res.render('ent-video-upload-complete', {item, eventType, eventData});
 });
 
+
+
+
 /* Music */
 router.get('/music', (req, res) => {
+  const options = {
+    method: 'GET',
+    url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
+    params: {q: 'craig david'},
+    headers: {
+      'x-rapidapi-key': '7e45ec5e4fmsh4f3dac417f9eaa7p179a33jsnbfe4cb2e4c79',
+      'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com'
+    }
+  };
 
-
-const options = {
-  method: 'GET',
-  url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
-  params: {q: 'marshmello'},
-  headers: {
-    'x-rapidapi-key': '7e45ec5e4fmsh4f3dac417f9eaa7p179a33jsnbfe4cb2e4c79',
-    'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com'
-  }
-};
-
-axios.request(options).then(function (response) {
-  const returnedData = response.data;
-	console.log(returnedData);
-  res.render('ent-music-home', {returnedData} );
-}).catch(function (error) {
-	console.error(error);
-});
+  axios.request(options).then(function (response) {
+    const returnedData = response.data;
+    console.log(returnedData);
+    res.render('ent-music-home', {returnedData} );
+  }).catch(function (error) {
+    console.error(error);
+  });
 });
 
 
+router.post('/music/search', (req, res) => {
+  const query = req.body.query;
+  res.redirect(`/entertainment/music/search/${query}`);
+});
 
+
+router.get('/music/search/:query', (req, res) => {
+  const query = req.params.query
+  const options = {
+    method: 'GET',
+    url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
+    params: {q: `${query}`},
+    headers: {
+      'x-rapidapi-key': '7e45ec5e4fmsh4f3dac417f9eaa7p179a33jsnbfe4cb2e4c79',
+      'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com'
+    }
+  };
+
+  axios.request(options).then(function (response) {
+    const returnedData = response.data;
+    console.log(returnedData);
+    res.render('ent-music-search-results', {returnedData, query} );
+  }).catch(function (error) {
+    console.error(error);
+  });
+});
+
+
+router.get('/music/add', ensureAuthenticated, async (req, res) => {
+  const userId = req.user.id;
+  const user = await User.findById(userId);
+  res.render('ent-music-add', {user})
+});
+
+router.get('/music/all', async (req, res) => {
+  const userId = req.user.id;
+  const user = await User.findById(userId);
+  const allMusic = await UserAudio.find();
+  res.render('ent-music-all', {allMusic, user})
+})
 router.get('/music/listen', (req, res) => {
   res.render('ent-music-listen')
 });
@@ -450,8 +534,7 @@ router.get('/music/create', (req, res) => {
 /* Podcasts */
 
 router.get('/podcasts', async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
+
 
   res.render('ent-podcasts-home', {user});
 });
@@ -459,19 +542,17 @@ router.get('/podcasts', async (req, res) => {
 
 /* Audio Books */
 
-router.get('/audio-books', async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
+router.get('/news', async (req, res) => {
 
-  res.render('ent-audio-books-home', {user});
+
+  res.render('ent-news-home', {user});
 });
 
 
 /* Sports */
 
 router.get('/sports', async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
+
 
   res.render('ent-sports-home', {user});
 });

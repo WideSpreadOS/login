@@ -98,11 +98,13 @@
             position: relative;
             box-shadow: none;
             padding: 0;
+            margin-bottom: 15px;
+            border-bottom: outset 2px lightskyblue;
         }
         .collapsible-learning-point {
             background: rgba(0, 0, 0, 0.3);
-            border-top: groove 2px lightskyblue;
-            border-bottom: groove 2px lightskyblue;
+            backdrop-filter: blur(4px);
+            border-top: outset 2px lightskyblue;
         }
         .collapsible-learning-point:hover {
             background: rgba(255, 255, 255, 0.3);
@@ -113,24 +115,32 @@
         }
 
         .learning-point p, .learning-point small {
-            border-bottom: groove 2px lightskyblue;
             transition: ease-in 0.5s;
         }
         .learning-point-header {
-            display: inline-flex;
-            width: 90%;
-            max-width: 90%;
+            display: flex;
+            width: 100%;
+            max-width: 100%;
             min-height: 40px;
+            justify-content: space-between;
+            align-items: center;
         }
         .learning-point-header h5 {
-            width: 85%;
+            padding-left: 10px;
         }
-        .learning-point-actions {
-            font-size: 1.5rem;
-            position: absolute;
-            color: rgba(255, 255, 255, 0.404);
-            right: 20px;
-            top: 12px;
+        .action-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 15%;
+        }
+        .openBtn {
+            display: block;
+        }
+        .closeBtn {
+            display: none;
         }
         .bookmark {
             display: block;
@@ -142,6 +152,23 @@
             outline: none;
             padding: 0;
             margin: 0;
+            color: yellow;
+        }
+        .learning-point-body {
+            display: none;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            
+        }
+        .learning-point-body p:first-of-type {
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            border-bottom: outset 1px lightskyblue;
+        }
+        .learning-point-body span {
+            color: lightskyblue;
+            padding: 5px;
         }
         .add-note {
             padding-top: 10px;
@@ -336,33 +363,39 @@
     <% learningPoints.forEach(function(point){ %>
         <li>
             <div class="learning-point">
-                <div class="learning-point-actions">
-                    <% if (point.id != thisUser.academy_info.bookmarked_learning_points) { %>
-                    <form action="/academy/<%= thisClass.id %>/<%= point.id %>/bookmark" method="post">
-                        <input type="text" name="for_class" value="<%= point.id %>" hidden>
-                        <button><span><i class="far fa-bookmark bookmark"></i></span></button>
-                    </form>
-                    <% } else { %>
-                        <form action="/academy/<%= thisClass.id %>/<%= point.id %>/remove-bookmark" method="post">
-                            <input type="text" name="for_class" value="<%= point.id %>" hidden>
-                            <button><span><i class="fas fa-bookmark bookmark"></i></span></button>
-                        </form>
-                    <% } %>
-                </div>
+
                 <div class="collapsible-learning-point">
                     <div class="learning-point-header">
                         <h5><%= point.section_header %></h5>
-                        <span><i class="fas fa-angle-double-down"></i></span>
-
-
+                        <div class="action-container">
+                            <span><i class="fas fa-angle-double-down openBtn"></i></span>
+                            <span><i class="fas fa-angle-double-up closeBtn"></i></span>
+                            <div class="learning-point-actions">
+                        <% if (point.id != thisUser.academy_info.bookmarked_learning_points) { %>
+                        <form action="/academy/<%= thisClass.id %>/<%= point.id %>/bookmark" method="post">
+                            <input type="text" name="for_class" value="<%= point.id %>" hidden>
+                            <button><span><i class="far fa-bookmark"></i></span></button>
+                        </form>
+                        <% } else { %>
+                            <form action="/academy/<%= thisClass.id %>/<%= point.id %>/remove-bookmark" method="post">
+                                <input type="text" name="for_class" value="<%= point.id %>" hidden>
+                                <button><span><i class="fas fa-bookmark" style="color: yellow;"></i></span></button>
+                            </form>
+                        <% } %>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-                <p><%= point.section_body %></p>
-                <p style="color: blue;"><%= point.section_notes %></p>
-                <div class="learning-point-actions">
-                    <p><span><a href="#"><i class="far fa-heart"></i></a><a href="#"><i class="fas fa-share-alt"></i></a><a href="#"><i class="far fa-comment-alt"></i></a><a href="#"><i class="fas fa-plus"></i></a></span></p>
+                <div class="learning-point-body">
+                    <p><%= point.section_body %></p>
+                    <% if (point.section_notes) { %>
+                        <p><span><%= point.section_notes %></span></p>
+                    <% } else { %>
+                        <span style="display: none;"></span>
+                    <% } %>
                 </div>
+
             </div>
 
         </li>
@@ -406,13 +439,6 @@
     <% }) %>
 </div>
 
-<div class="spread-break">
-    <hr>
-</div>
-
-<div class="take-quiz">
-    <a href="/academy/courses/<%= thisCourseId %>/<%= thisClass.id %>/<%= quiz.id %>">Take Quiz</a>
-</div>
 
 <div class="spread-break">
     <hr>
@@ -513,25 +539,29 @@
     <span></span>
 <% } %>
 
-<div style="text-align: center; color: #fff;" class="add-questions">
-    <h5><a style="text-align: center; color: #fff;" href="/academy/<%= thisCourseId %>/<%= thisClass.id %>/<%= quiz.id %>/add">Add to Quiz</a></h5>
-</div>
 
 <script>
+    const closeBtn = document.getElementsByClassName('closeBtn')
+    const openBtn = document.getElementsByClassName('openBtn')
     var coll = document.getElementsByClassName("collapsible-learning-point");
     var i;
     
+    
     for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+
         var content = this.nextElementSibling;
         if (content.style.display === "block") {
           content.style.display = "none";
         } else {
-          content.style.display = "block";
+            content.style.display = "block";
         }
+      
       });
     }
+    
+
     </script>
 
 

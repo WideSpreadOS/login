@@ -8,8 +8,47 @@ const { createClient } = require('pexels');
 const User = require('../models/User');
 const Post = require('../models/Post');
 
-router.get('/', (req, res) => {
-    res.render('socialspread-home')
+router.get('/', ensureAuthenticated, async (req, res) => {
+    const id = req.user._id;
+    const thisUser = await User.findById(id);
+    const friendIds = req.user.friends;
+    const posts = await Post.find({ "author": { "$in": friendIds } }).sort({ createdAt: 'desc' }).populate('comments');
+
+    let checkAuthor = []
+    const postAuthor = () => {
+        for (i = 0; i < posts.length; i++) {
+            posts[i].author.push(checkAuthor)
+        }
+    }
+
+    const allPosts = await Post.find({ "author": { "$in": friendIds } })
+        .sort({ createdAt: 'desc' })
+        .populate({
+            path: 'author',
+            model: 'User'
+        })
+        .populate({
+            path: 'comments',
+            model: 'Comment',
+            populate: {
+                path: 'author',
+                model: 'User'
+            }
+        })
+        .exec(function (err, data) {
+            console.log(`Dashboard Wall Page Loaded...`)
+            if (err) {
+                return console.log(err);
+            } else {
+                return res.render('socialspread-home', {
+                    currentPageTitle: 'YourSpread',
+                    data,
+                    id,
+                    thisUser
+                })
+            }
+        });
+
 });
 
 router.get('/user/:id', ensureAuthenticated, (req, res) => {

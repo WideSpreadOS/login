@@ -1,23 +1,46 @@
 <style>
 
+    .main-header-page-menu-container {
+        background: rgba(135, 206, 250, 0.5);
+        border-top: outset 2px #fff;
+        border-bottom: outset 2px #fff;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
+    }
 
-.main-header-page-menu-container {
-    background: hotpink;
-}
+    .main-header-page-menu-inner {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .main-header-page-menu-inner-item {
+        min-width: 25%;
+        margin-top: 5px;
+    }
+    .main-header-page-menu-inner-item a {
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        padding: 5px;
+        font-size: 1.3rem;
+    }
     .spread-page-title {
-        background: rgba(166, 216, 247, 0.445);
+        background: rgba(166, 216, 247, 0.5);
         text-align: center;
         padding: 5px;
         border-top: outset 2px #555;
         border-bottom: outset 2px #555;
         box-shadow: 0 0 4px #555, 0 0 2px lightskyblue;
-        margin-bottom: 40px;
+        margin-bottom: 40px; 
+        margin-top: 80px; 
     }
     .spread-page-title h1{
-        color: rgba(37, 48, 48, 0.829);
-        text-shadow: 0 0 2px rgba(255, 255, 255, 0.671);
+        color: rgba(150, 201, 201, 0.829);
+        text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
         margin-bottom: 0;
-
+        font-size: 2rem;
     }
 
 
@@ -33,6 +56,17 @@
         margin-top: 10px;
         border-top: outset 2px #333;
         border-bottom: outset 2px #333;
+    }
+    .spread-slider-container h5 {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(4px);
+        padding: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .spread-slider-container>h5>a {
+        text-decoration: none;
+        color: #fff;
     }
 
     .spread-slider {
@@ -64,7 +98,6 @@
     }
     
     .spread-header-slider-item {
-        min-height: 150px;
         min-height: 100%;
         background: rgba(0, 0, 0, 0.25);
         height: 100px;
@@ -114,7 +147,6 @@
 /* MAIN SPREAD CONTENT */
 
     .main-spread-content {
-        border-bottom: teal 1px solid;
         padding-bottom: 15px;
         margin-bottom: 20px;
     }
@@ -123,11 +155,23 @@
         background: rgba(166, 216, 247, 0.445);
         padding: 5px;
         border-bottom: outset 2px #555;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+
     }
     .main-spread-content-header {
         text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-content: center;
+    }
+    .main-spread-content-header a {
+        text-decoration: none;
+        color: #fff;
+        min-width: 25%;
+        padding: 4px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+
     }
 
     .main-spread-content-header-title {
@@ -159,109 +203,51 @@
 
 
     .spread-page-footer-container {
+        position: fixed;
+        left: 0;
         bottom: 0;
         max-height: 40px;
+        max-width: 40px;
+        background: rgba(135, 206, 250, 0.5);
+        border: outset 2px #fff;
+        border-left: none;
+        border-bottom: none;
+        border-top-right-radius: 6px;
+        padding: 5px;
+        text-align: center;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+        z-index: 1000;
+    }
+    .spread-page-footer-container a {
+        color: #fff;
+        font-weight: bolder;
+        font-size: 1.5rem;
     }
 </style>
 <div class="spread-page-title">
     <h1>Entertainment</h1>
 </div>
 
-
-<div class="spread-header-container">
-    <div id="spreadHeaderMain" class="spread-header-main">
-
-        <div class="spread-header-title">
-            <h4>In the Spotlight</h4>
-        </div>
-        
-        <div class="spread-header-menu-container">
-            <div class="spread-header-menu">
-                <div class="spread-header-menu-zone-container">
-                        <div class="spread-header-menu-zone-item">
-                            <div class="spread-button-container">
-                                <div class="spread-button-link">
-                                    <a href="#">
-                                        Btn
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="spread-header-menu-zone-item">
-                            <div class="spread-button-container">
-                                <div class="spread-button-link">
-                                    <a href="#">
-                                        Btn
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="spread-header-menu-zone-item">
-                            <div class="spread-button-container">
-                                <div class="spread-button-link">
-                                    <a href="#">
-                                        Btn
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="spread-header-menu-zone-item">
-                            <div class="spread-button-container">
-                                <div class="spread-button-link">
-                                    <a href="#">
-                                        Btn
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="spread-header-slider-container">
-            <div class="spread-header-slider-item">
-                <p>o</p>
-            </div>
-            <div class="spread-header-slider-item">
-                <p>o</p>
-            </div>
-            <div class="spread-header-slider-item">
-                <p>o</p>
-            </div>
-            <div class="spread-header-slider-item">
-                <p>o</p>
-            </div>
-            <div class="spread-header-slider-item">
-                <p>o</p>
-  
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
+<%- include('partials/entertainment/zone-nav') %>
 
 <!-- PAGE MAIN CONTENT -->
 
 <div class="main-spread-content">
     <!-- MAIN CONTENT HEADER -->
 
-    <div class="main-spread-content-header-container">
+    <div id="top" class="main-spread-content-header-container">
         <div class="main-spread-content-header">
-            <div class="main-spread-content-header-title">
-                <h4>New Attractions</h4>
-            </div>
+                <a href="#movieContainer">Movies</a>
+                <a href="#tvContainer">Shows</a>
             
         </div>
     </div>
 
-    <div class="spread-slider-container">
+    <div id="movieContainer" class="spread-slider-container">
         <h5><a href="/entertainment/movies">See All Movies</a></h5>
         <div class="spread-slider-anchor">
             <div class="spread-slider-rack">
                 <div id="movieSpreadSlider" class="spread-slider">
-                    <!-- Movies forEach from DB as recommended: true -->
                     <% movies.forEach(function(movie) { %> 
                         <div class="spread-slider-item">
                             <a href="/entertainment/movies/<%= movie.link %>">
@@ -275,21 +261,27 @@
             </div>
         </div>
     </div>
-    
-    <div class="spread-slider-container">
+    <div id="tvContainer" class="spread-slider-container">
         <h5><a href="/entertainment/tv">See All TV Shows</a></h5>
         <div class="spread-slider-anchor">
             <div class="spread-slider-rack">
                 <div id="tvSpreadSlider" class="spread-slider">
-                    <!-- TV forEach from DB as recommended: true -->
-                    <p>TV Slider</p>
-
+                    <% shows.forEach(function(show) { %>
+                        <div class="spread-slider-item">
+                            <a href="/entertainment/tv/<%= show.id %>">
+                                <div class="spread-slider-item-background">
+                                    
+                                    <img src="https://image.tmdb.org/t/p/w500<%= show.poster %>" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
                 </div>
             </div>
         </div>
     </div>
 
-
+ 
     
     <div class="spread-slider-container">
         <h5><a href="/entertainment/music">See All Music</a></h5>
@@ -311,28 +303,11 @@
 
 
 
-<!-- OLD MENU -->
-
-<div class="main-header-page-menu-container">
-    <div id="mainHeaderPageMenu">
-        <div class="main-header-page-menu-inner">
-            <a href="/entertainment">Entertainment Home</a>
-            <a href="/entertainment/movies">Movies</a>
-            <a href="/entertainment/tv">TV Shows</a>
-            <a href="/entertainment/music">Music</a>
-            <a href="/entertainment/podcasts">Podcasts</a>
-            <a href="/entertainment/audio-books">Audio Books</a>
-            <a href="/entertainment/sports">Sports</a>
-
-        </div>
-    </div>
-    <p>Scroll left & right for more options</p>
-</div>
 
 
 
 <!-- SPREADPAGE FOOTER -->
 
 <div class="spread-page-footer-container">
-    <h5>SpreadPage Footer</h5>
+    <a href="#top">&#8593;</a>
 </div>

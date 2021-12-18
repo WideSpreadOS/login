@@ -31,7 +31,7 @@ router.get('/', ensureAuthenticated, async (req, res) => {
 });
 
 router.get('/courses', ensureAuthenticated, async (req, res) => {
-    const courses = await Course.find({});
+    const courses = await Course.find().populate('classes').exec();
     res.render('academy-all-courses', {currentPageTitle: 'All Courses', courses})
 });
 

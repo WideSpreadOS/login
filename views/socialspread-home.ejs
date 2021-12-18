@@ -1,23 +1,410 @@
 <style>
-    .spread-links p {
-        text-align: center;
-        padding: 10px;
-        width: 100%;
-        border-top: groove 2px lightskyblue;
-        border-bottom: groove 2px lightskyblue;
-        border-radius: 8px;
-        background: rgba(0, 0, 0, 0.3);
-    }
-    .spread-links a {
-        color: lightskyblue;
+   @media screen and (min-width: 299px) {
+       .create-spread-post {
+           width: 100%;
+           margin-bottom: 30px;
+       }
+       .create-spread-post h5 {
+           text-align: center;
+           font-size: 1.5rem;
+           padding: 8px;
+       }
+       .create-spread-post textarea {
+           width: 100%;
+           background: rgba(255, 255, 255, 0.5);
+           backdrop-filter: blur(4px);
+           color: #000;
+           padding: 5px;
+           outline: none;
+           border: none;
+           border-top: outset 2px lightskyblue;
+           border-bottom: outset 2px lightskyblue;
+           font-family: 'Play', sans-serif;
+        }
+        .create-spread-post textarea::placeholder {
+            color: #000;
+        }
+        .create-spread-post button {
+            width: 80%;
+            margin-left: 10%;
+            background: rgba(0, 255, 0, 0.5);
+            backdrop-filter: blur(4px);
+            outline: none;
+            border: none;
+            padding: 5px; 
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+       }
+        .socialspread-posts {
+            width: 100vw;
+        }
+        .socialspread-post-header {
+        }
+        .socialspread-post-header h5 {
+            text-align: center;
+            font-size: 1.7rem;
+            padding: 10px;
+        }
+        .posts-container {
+        }
+        .post-container {
+            border-top: outset 2px lightskyblue;
+            border-bottom: outset 2px lightskyblue;
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .post {
+        }
+
+/* POST AUTHOR DATA */
+        .post-author-data {
+        }
+        .image-share {
+            max-width: 100vw;
+            width: 100%;
+        }
+        .image-share img {
+            width: 100%;
+        }
+        .author-image {
+            max-width: 100vw;
+            width: 100%;
+        }
+        .author-image img {
+            width: 100%;
+        }
+        .author-info {
+        }
+        .author-info a {
+            padding: 8px;
+            width: 100%;
+            text-decoration: none;
+        }
+        .author-info>a>h5 {
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+/* POST DATA */
+        .post-data {
+        }
+        .post-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3px;
+            margin-bottom: 8px;
+        }
+        .edit-buttons {
+            border-right: solid 3px #fff;
+            padding: 3px;
+            padding-right: 8px;
+        }
+        .edit-buttons a {
+            margin-right: 5px;
+        }
+        .post-time {
+            padding: 3px;
+        }
+        .post-body {
+            padding: 8px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            margin-bottom: 8px;
+            border-top: outset 2px lightskyblue;
+            border-bottom: outset 2px lightskyblue;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        .post-body p {
+            color: #fff;
+            word-break: break-word;
+            text-indent: 10px;
+        }
+        .post-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+        .action-button {
+            padding: 3px;
+            margin-right: 5px;
+        }
+        .action-button button {
+            margin-right: 3px;
+            outline: none;
+            border: none;
+            background: transparent;
+            color: #fff;
+        }
+    /* COMMENTS */
+        .comments-container {
+            background: #000;
+            border-top-right-radius: 6px;
+            width: 90%;
+            max-height: 300px;
+            overflow-y: scroll;
+            padding: 5px;
+        }
+        .comment-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .comment-data {
+            max-width: 85%;
+            min-width: 85%;
+            width: 85%;
+            padding: 8px;
+            color: #fff;
+        }
+        .comment-author {
+        }
+        .comment-author-image {
+            max-width: 15%;
+            min-width: 15%;
+            width: 15%;
+        }
+        .comment-author-image img {
+            width: 100%;
+            min-width: 100%;
+        }
+        .comment-author-name {
+        }
+        .comment-author-name a {
+            text-decoration: none;
+            color: lightskyblue;
+        }
+        .comment-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .comment-time {
+            font-size: 0.7rem;
+        }
+        .edit-comment {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .comment-body {
+            padding: 5px;
+        }
+        .comment-body p {
+            word-break: break-word;
+        }
+        .spread-comment {
+            margin-bottom: 50px;
+            width: 90%;
+            display: flex;    
+            flex-direction: column;
+            flex-wrap: nowrap;
+        }
+
+        .spread-comment textarea {
+            width: 100%;
+            max-width: 100%;
+            border: none;
+            outline: none;
+            background: rgba(135, 206, 250, 0.5);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 5px;
+            font-family: 'Play', sans-serif;
+            border-bottom-right-radius: 6px;
+        }
+        .spread-comment textarea::placeholder {
+            color: #fff;
+        }
+        .spread-comment button {
+            width: 50%;
+            margin-left: 50%;
+            outline: none;
+            border: none;
+            padding: 5px;
+            background: rgba(0, 255, 0, 0.5);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
     }
 </style>
-<div class="page-title">
-    <h1><%= currentPageTitle %></h1>
+
+    <div class="page-title">
+        <h2>SocialSpread</h2>
+    </div>
+
+<%- include('partials/socialspread/zone-nav') %>
+
+
+<div class="create-spread-post">
+    <h5 style="text-align: center;">Spread Something</h5>
+    <form action="/users/<%= id %>/post" method="POST">
+        <textarea required name="postBody" placeholder="What would you like to say?" id="postBody" class="form-control"></textarea>
+        <button type="submit">Spread It</button>
+    </form>
 </div>
 
-<div class="spread-links">
-    <p><a href="/socialspread/photospread">PhotoSpread</a></p>
-    <p><a href="/socialspread/giphyspread">GiphySpread</a></p>
-    <p><a href="/socialspread/videospread/pixabay">VideoSpread</a></p>
+
+
+<div class="socialspread-posts">
+
+    <div class="socialspread-post-header">
+        <h5>Recent Spreads</h5>
+    </div>
+
+    <div class="posts-container">
+        <% data.forEach(function(post){ %>
+            <div class="post-container">
+                <div class="post">
+                    <!-- POST AUTHOR DATA -->
+                    <div class="post-author-data">
+                        <% if (post.container_image) { %>
+                            <div class="image-share">
+                                <img src="<%= post.container_image %>" alt="">
+                            </div>
+                        <% } else { %>
+                            <div class=" author-image">
+                                <% if (post.author.user_avatar) { %>
+                                    <img src="/image/<%= post.author.user_avatar %>" alt="'s Avatar">
+                                <%} else { %>
+                                    <img src="/images/system/default-user_1a1a1a.png" alt="Default Avatar">
+                                <% } %>
+                            </div>
+                        <% } %>
+                        <div class="author-info">
+                            <a href="/users/<%= post.author.id %>">
+                                <h5><%= post.author.fname %> <%= post.author.lname %></h5>
+                            </a>
+                        </div>
+                    </div>
+                
+                <!-- POST DATA -->
+                    <div class="post-data">
+                        <div class="post-header">
+                            <div class="edit-post">
+                                <% if(id==post.author.id){ %>
+                                    <span class="edit-buttons">
+                                        <a href="/users/post/edit/<%= post.id%>"><small><i class="far fa-edit" style="color: yellow"></i></small></a>
+                                        <a href="/users/post/<%= post.id%>"><small><i class="far fa-trash-alt" style="color: red"></i></small></a>
+                                    </span>
+                                    <% } else { %>
+                                        <span style="display: none;"></span>
+                                    <% } %>
+
+                            </div>
+                            <div class="post-time">
+                                <p><small><%= post.createdAt.toLocaleTimeString() %> - <%= post.createdAt.toLocaleDateString() %></small></p>
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <p><%= post.postBody %></p>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-button">
+                                <span class="like-button">
+                                    <form action="/dashboard/wall/post/<%= post.id %>/like?_method=PATCH" method="post">
+                                        <input type="text" name="likedBy" value="<%= id %>" hidden="true">
+                                        <button type="submit"><i class="far fa-heart"></i></button>
+                                        <span><%= post.likes %></span>
+                                    </form>
+                                </span>
+                            </div>
+                            <div class="action-button">
+                                <span class="like-button">
+                                    <form action="/dashboard/wall/post/<%= post.id %>/save?_method=PATCH" method="post">
+                                        <input type="text" name="saved_posts" value="<%= post.id %>" hidden="true">
+                                        <button type="submit"><i class="far fa-bookmark"></i></button>
+                                    </form>
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="comments-container">
+                    <h6>Comments</h6>
+                        <% post.comments.forEach(function(comment) { %>
+                            <div class="comment-container">
+                                <div class="comment-author-image">
+                                    <a href="/users/<%= comment.author.id %>">
+                                        <img src="/image/<%= comment.author.user_avatar %>" alt="'s Avatar">
+                                    </a>
+                                </div>
+                                <div class="comment-data">
+                                    <div class="comment-author">
+                                        <div class="comment-author-name">
+                                            <a href="/users/<%= comment.author.id %>">
+                                                <p><%= comment.author.fname %> <%= comment.author.lname %></p>
+                                            </a>
+                                        </div>
+                                        <div class="comment-header">
+                                            <div class="comment-time">
+                                                <p><small><%= comment.createdAt.toLocaleTimeString() %> - <%= comment.createdAt.toLocaleDateString() %></small></p>
+                                            </div>
+                                            <div class="edit-comment">
+                                                <span>
+                                                    <% if(id==comment.author.id){ %>
+                                                        <a style="color: #fff;" href="/users/comment/<%= comment.id%>/edit"><small><i class="far fa-edit" style="color: yellow"></i></small></a>
+                                                    <% } else { %>
+                                                        <span></span>
+                                                    <% } %>
+                                                </span>
+                                                <span>
+                                                    <% if(id==comment.author.id){ %>
+                                                        <div class="action-button">
+                                                            <span class="like-button">
+                                                                <form action="/users/comment/<%= comment.id%>/delete?_method=DELETE" method="post">
+                                                                    <input type="text" name="comment" value="<%= comment.id %>" hidden="true">
+                                                                    <button type="submit"><i class="far fa-trash-alt" style="color: red"></i></button>
+                                                                </form>
+                                                            </span>
+                                                        </div>
+                                                    <% } else { %>
+                                                        <span></span>
+                                                    <% } %>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="comment-body">
+                                        <p><%= comment.commentBody %></p>
+                                    </div>
+                                    <div class="action-button">
+                                        <span class="like-button">
+                                            <form action="/<%= comment.id %>/like?_method=PATCH" method="post">
+                                                <input type="text" name="likedBy" value="<%= id %>" hidden="true">
+                                                <button type="submit"><i class="far fa-heart"></i></button>
+                                                <span class="likes-count">
+                                                    <%= comment.likes %>
+                                                </span>
+                                            </form>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                </div>
+            </div>
+            <div class="spread-comment">
+                    <form action="/users/<%= post.author.id %>/post/<%= post.id %>/comment" method="POST">
+                        <textarea required name="commentBody" id="commentBody" style="color: #fff"
+                            placeholder="Add a comment..."></textarea>
+                        <button type="submit">Comment</button>
+                        <input type="text" name="fromPost" value="<%= post.id %>" hidden="true">
+                    </form>
+            </div>
+        <% }) %>
+    </div>
 </div>

@@ -3,225 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+<!--     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
     <title>WideSpread</title>
     <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
-    <!-- Synthisizer -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grechen+Fuemen&display=swap" rel="stylesheet">
 
-    <!-- WideSpread Styles -->
-    <link rel="stylesheet" href="./style.css" type="text/css" />
-    <link rel="stylesheet" href="/css/style.css" id="style">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/clock.css">
-    <link rel="stylesheet" href="/css/user-card.css">
-    <link rel="stylesheet" href="/css/flashcard.css">
-    <link rel="stylesheet" href="/css/tabs.css">
-    <link rel="stylesheet" href="/css/socialspread.css">
-    <link rel="stylesheet" href="/css/flexfloor.css">
-    <link rel="stylesheet" href="/css/spreadshield.css">
-    <link rel="stylesheet" href="/css/aether.css">
+<link rel="stylesheet" href="/css/app.css"> 
     <!-- 3rd Party API Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.3.1/introjs.min.css" integrity="sha512-631ugrjzlQYCOP9P8BOLEMFspr5ooQwY3rgt8SMUa+QqtVMbY/tniEUOcABHDGjK50VExB4CNc61g5oopGqCEw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="/css/intro.css">
-   
+    <!-- WideSpread Styles -->
+    <!--     <link rel="stylesheet" href="/css/style.css" id="style">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/clock.css">
+        <link rel="stylesheet" href="/css/user-card.css">
+        <link rel="stylesheet" href="/css/flashcard.css">
+        <link rel="stylesheet" href="/css/tabs.css">
+        <link rel="stylesheet" href="/css/socialspread.css">
+        <link rel="stylesheet" href="/css/flexfloor.css">
+        <link rel="stylesheet" href="/css/spreadshield.css">
+        <link rel="stylesheet" href="/css/aether.css"> 
+    -->
     <style>
+        @media (min-width: 299px) {
+            body {
+                background: #000;
+                padding: 0;
+                margin: 0;
+                margin-top: 50px;
+                padding-bottom: 70px;
+            }
+            .container {
+                width: 100vw;
+            }
+            .widespread-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100vw;
+                z-index: 9999;
+                background: rgba(0, 0, 0, 0.15);
+                backdrop-filter: blur(4px);
+                border-bottom: outset 2px lightskyblue;
+            }
+            .logo {
+                width: 100vw;
+                background: rgba(255, 255, 255, 0.25);
+                text-align: center;
+            }
+            .logo h1 {
+                padding: 8px;
+                width: 100%;
+                font-size: 1.5rem;
+            }
+            .logo h1 a {
+                color: #fff;
+                text-decoration: none;
+            }
+            .spreadsearch {
+                display: none;
+            }
+            .container {
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+        }
+        @media (min-width: 768px) {
 
+            .widespread-header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 100vw;
+                height: 50px;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+            }
+            .logo {
+                width: 65%;
+                height: 100%;
+            }
+            .spreadsearch {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                width: 35%;
+                background: rgba(255, 255, 255, 0.25);
+                height: 100%;
+            }
+            .spreadsearch input {
+                width: 70%;
+                padding: 3px;
+                background: rgba(255, 255, 255, 0.5);
+                backdrop-filter: blur(4px);
+                outline: none;
+                border: none;
+                color: #000;
+                border-radius: 0;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+            .spreadsearch input::placeholder {
+                color: #000;
+            }
+            .spreadsearch button {
+                width: 25%;
+                outline: none;
+                border: none;
+                background: rgba(135, 206, 250, 0.5);
+                padding: 3px;
+                border-radius: 0;
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+        }
+        
+        @media (min-width: 992px) {	
+            .widespread-header {
+                width: 85vw;
+                margin-left: 15vw;
+            }
+        }
+        @media (min-width: 1200px) {
 
-@media screen and (max-width: 2699px) {
-
-    .widespread-header {
-        width: 85vw;
-        height: 85px;
-        margin-left: 0;
-        position: fixed;
-        top: 0px;
-        left: 15vw;
-    }
-    .widespread-header .logo {
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 8px;
-        backdrop-filter: blur(2px);
-    }
-    .logo {
-        width: 100%;
-        border-radius: 0;
-        box-shadow: 0 8px 8px 2px rgba(0, 0, 0, 0.5);
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-    .logo h1 {
-        color: rgba(255, 255, 255, 0.5);
-    }
-    .logo a {
-        font-size: 1.5rem;
-        color: rgba(255, 255, 255, 0.5);
-        text-shadow: 0 0 1.5px rgba(126, 208, 247, 0.616);
-    }
-    .user-bar {
-        display: block;
-    }
-   /* WideSpread Logo */
-   .widespread-center-logo {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 150px;
-      height: 100px;
-      z-index: -200;
-    }
-    .widespread-center-logo img {
-        width: 100%;
-        max-width: 100%;
-        min-width: 100%;
-        filter: drop-shadow( 0 0 15px  #000); 
-    }
-    .spreadsearch {
-        position: absolute;
-        right: 8px;
-        top: 8px;
-        width: 250px;
-        z-index: 1000000;
-    }
-    .spreadsearch input {
-        width: 100%;
-        border-top-left-radius: 8px;
-        border-bottom-left-radius: 8px;
-        border-top-right-radius: 8px;
-        border: none;
-        outline: none;
-        border-top: groove 2px #000;
-        padding: 5px;
-    }
-    .spreadsearch button {
-        width: 30%;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-        border: none;
-        outline: none;
-        border-top: groove 1px transparent;
-        border-bottom: groove 2px #333;
-        padding: 5px;
-        color: rgba(255, 255, 255, 0.5);
-        text-shadow: 0 0 2px rgba(0, 128, 0, 0.75);
-        margin-left: 70%;
-        background: transparent;
-        box-shadow: inset 0 -2px 10px rgba(0, 255, 0, 0.45), 0 0 3px rgba(0, 255, 0, 0.5);
-        transition: ease-in 0.4s;
-    }
-    
-    .spreadsearch button:hover {
-        width: 30%;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-        border: none;
-        outline: none;
-        border-top: groove 1px rgba(0, 255, 0, 0.75);
-        border-bottom: groove 2px #333;
-        padding: 5px;
-        color: rgba(255, 255, 255, 0.8);
-        text-shadow: 0 0 2px rgba(0, 128, 0, 0.75);
-        margin-left: 70%;
-        background: rgba(255, 255, 255, 0.01);
-        backdrop-filter: blur(2px);
-        box-shadow: inset 0 -2px 4px rgba(0, 255, 0, 0.45), 0 0 7px rgba(0, 255, 0, 0.5);
-        transition: ease-in 0.4s;
-    }
-
-    .container {
-        width: 85vw;
-        margin-left: 15vw;
-    }
-}
-
-
-@media screen and (max-width: 1199px) {
-    .widespread-header {
-        width: 100vw;
-        margin-left: 0;
-        position: fixed;
-        top: 0px;
-        left: 0;
-    }
-    .logo {
-        position: fixed;
-        top: 0px;
-        left: 0;
-        width: 100vw;
-        border-radius: 0;
-    }
-    .container {
-        width: 100vw;
-        margin-left: 0;
-    }
-    
-}
-
-@media screen and (max-width: 500px) {
-    .spreadsearch {
-        display: none;
-    }
-    .user-bar {
-        display: none;
-    }
-   /* WideSpread Logo */
-   .widespread-center-logo {
-        position: fixed;
-        bottom: 50px;
-        left: 40px;
-        width: 50px;
-        height: 50px;
-        z-index: 30;
-    }
-    .widespread-center-logo img {
-        width: 100%;
-        max-width: 100%;
-        min-width: 100%;
-        filter: drop-shadow( 0 0 15px  #000); 
-    }
-    .outerThumbContainer {
-        position: fixed;
-        bottom: 0px;
-        right: 25px;
-        width: 50px;
-        height: 100px;
-        border-radius: 50%;
-    }
-    .widespread-header {
-        width: 100vw;
-        height: 85px;
-        margin-left: 0;
-        position: fixed;
-        top: 0px;
-        left: 0;
-    }
-    .container {
-        width: 100vw;
-        margin-left: 0;
-        padding-top: 100px;
-    }
-}
-
+            .container {
+                width: 85%;
+                margin-left: 15%;
+            }
+        }
     </style>
 </head>
+
+
 <body>
 
     <div class="widespread-header">
         <div class="logo">
             <h1><a href="/dashboard" title="Go to your Dashboard">WideSpread</a></h1>
+        </div>        
                     
             <!-- Search Bar -->
-            <div class="spreadsearch">
-                <form action="/search" method="post">
-                <input type="search" name="query" id="spreadSearch" placeholder="Search...">
-                <button type="submit">Search</button>
-                </form>
-            </div>  
-        </div>        
+        <div class="spreadsearch">
+            <form action="/search" method="post">
+            <input type="search" name="query" id="spreadSearch" placeholder="Search...">
+            <button type="submit">Search</button>
+            </form>
+        </div>  
     </div>
 
     

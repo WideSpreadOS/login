@@ -1,0 +1,9 @@
+<style>
+
+</style>
+
+<form action="/notebooks/<%= notebookId %>/section/<%= sectionId %>/note/<%= note.id %>/edit?_method=PATCH" method="post">
+    <input type="text" name="note_title" value="<%= note.note_title %>">
+    <textarea name="note_body"><%= note.note_body %></textarea>
+    <button type="submit">Update Note</button>
+</form>

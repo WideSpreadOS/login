@@ -120,24 +120,16 @@
 <div class="news-outlet-container">
 <h1>News</h1>
 </div>
+
+<form action="/news/search" method="post">
+    <input type="search" name="searchQuery" placeholder="Search for articles...">
+    <button type="submit">Search</button>
+</form>
+
+
 <div class="news-articles">
 
-    <% results.forEach(function(article){ %>
-        <div class="article">
-            <div class="">
-                <div class="article-image">
-                    <img src="<%= article.articleImage %>" alt="<%= article.articleImageAlt %>">
-                </div>
-            </div>
-            <div class=""></div>
-            <div class="">
-                <div class="article-info">
-                    <small><%= article.time %></small>
-                    <a href="<%= article.link %>" target="_blank"><h5><%= article.title %></h5> </a>
-                    <p><%= article.newsPreview %></p>
-                </div>
-            </div>
-        </div>
-        
-        <% }); %>
-    </div>
+    <% returnedData.forEach(function(source){ %>
+        <p><%= source %></p>        
+    <% }); %>
+</div>

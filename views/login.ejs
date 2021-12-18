@@ -1,13 +1,122 @@
 <style>
-  input {
-    color: #fff;
-  }
-  input::placeholder {
-    color: #fff;
-  }
+
+    @media screen and (min-width: 299px) {
+      .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        min-width: 100vw;
+        width: 100vw;
+      }
+      .video-background video {
+        min-height: 100vh;
+        height: 100vh;
+        opacity: 0.75;
+        width: auto;
+        margin-left: -25%;
+        background: #000;
+        z-index: -100;
+      }
+
+      .login-form {
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.15));
+        backdrop-filter: blur(4px);
+        min-width: 100vw;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding-top: 10px;
+        border-top: outset 2px lightskyblue;
+        border-bottom: outset 2px lightskyblue;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+      }
+      .login-form h5 {
+        padding: 10px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        margin-bottom: 15px;
+        border-top: outset 2px lightskyblue;
+        border-bottom: outset 2px lightskyblue;
+      }
+      .spread-input {
+        width: 100%;
+        padding: 0;
+        margin-top: 20px;
+      }
+      .spread-input label {
+        color: #fff;
+        text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        font-size: 1.2rem;
+        width: 100%;
+        padding: 5px;
+        padding-right: 15px;
+        text-align: center;
+        border-top: outset 1px lightskyblue;
+        border-right: outset 1px lightskyblue;
+        border-top-right-radius: 4px;
+      }
+      .spread-input input {
+        margin-bottom: 10px;
+        margin-top: 8px;
+        background: rgba(135, 206, 250, 0.5);
+        backdrop-filter: blur(4px);
+        width: 100%;
+        outline: none;
+        border: none;
+        border-top: outset 1px #fff;
+        border-bottom: outset 1px #fff;
+        padding: 5px;
+        box-shadow: inset 0 0 4px #fff, inset 0 0 8px lightskyblue;
+      }
+      .spread-input input::placeholder {
+        color: #fff;
+      }
+      .login-form button {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 20px;
+        background: rgba(0, 128, 0, 0.5);
+        backdrop-filter: blur(4px);
+        color: #fff;
+        padding: 5px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border: outset 1px lime;
+        border-bottom: none;
+      }
+      .widespread-logo {
+        width: 100vw;
+        max-width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .widespread-logo img {
+        width: 50%;
+        opacity: 0.75;
+        filter: drop-shadow( 0 0 8px rgba(135, 206, 250, 0.75)); 
+      }
+
+
+    }
+
+    @media screen and (min-width: 768px) {
+
+    }
+
+    @media screen and (min-width: 992px) {
+
+    }
+
+
   @media screen and (min-width: 1200px) {
         body {
           background: #000;
+        }
+        .main-spread-menu {
+            display: none;
         }
         .main-spread-menu-container {
             box-shadow: 0 6px 6px 3px rgba(0, 0, 0, 0.5);
@@ -86,88 +195,10 @@
           filter: drop-shadow( 0 0 15px  #000); 
         }
 
-        .register-form {
-          margin-left: 5%;
-          width: 30%;
-          position: relative;  
-        }
-        .register-form form {
-          position: absolute;
-          top: 30px;
-          left: 0;
-          width: 100%;
-        }
-        .input-data {
-          width: 100%;
-        }
-        .register-form label {
-          font-size: 0.7rem;
-          color: #fff;
-          text-align: center;
-          width: 100%;
-          margin-top: 10px;
-        }
-        .register-form input {
-          right: 10px;
-          padding: 5px;
-          background: rgba(135, 206, 250, 0.3);
-          border: none;
-          border-top: groove 2px #fff;
-          border-bottom: groove 2px #fff;
-          outline: none;
-          margin-top: 5px;
-          border-radius: 0;
-          width: 100%;
-        }
-    }
-
-
-@media screen and (max-width: 1199px) {
-        .main-spread-menu {
-            display: none;
-        }
-    }
-
-
-@media screen and (max-width: 500px) {
-
-      .spread-input input {
-        background: blue;
-        padding: 5px;
-        border-radius: 4px;
-        border: 4px #555 inset;
-        box-shadow: inset 0 0 4px #fff, inset 0 0 8px lightskyblue, 0 0 2px #333, -1px 1px 3px red;
-      }
-
-      .video-background video {
-        min-height: 100vh;
-        width: auto;
-        height: 100vh;
-        margin-left: -25%;
-        background: #000;
-        
-      }
-      .login-form {
-        background: rgba(135, 206, 250, 0.25);
-        backdrop-filter: blur(4px);
-        min-width: 100vw;
-      }
       
-
-
-
-
-      .widespread-logo {
-        background: red;
-      }
-
-
-
-      .register-form {
-        background: purple;
-        display: none;
-      }
     }
+
+
 
 </style>
 
@@ -192,19 +223,15 @@
 
 
 
-<!-- Login/Register Forms -->
-
-<div class="both-forms">
-
   <!-- Login Form -->
 
   <div class="login-form">   
     <%- include('./partials/messages') %>
     <form action="/users/login" method="POST">
-      <div class="glass" style="border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
-        <h5 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h5>
-        <div class="input-group">
-          <label for="email" style="color: #fff">Email</label>
+      <div class="glass">
+        <h5><i class="fas fa-sign-in-alt"></i>  Login</h5>
+        <div class="spread-input">
+          <label for="email">Email</label>
           <input
             type="email"
             id="email"
@@ -213,8 +240,8 @@
             placeholder="Enter your email"
             />
         </div>
-        <div class="form-group spread-input">
-          <label style="color: #fff" for="password">Password</label>
+        <div class="spread-input">
+          <label for="password">Password</label>
           <input
             type="password"
             id="password"
@@ -223,7 +250,7 @@
             />
         </div>
       </div>
-      <button type="submit" style="border-radius: 0; border-top-right-radius: 8px; border-bottom-right-radius: 8px;">Login</button>
+      <button type="submit">Login</button>
     </form>
   </div>
 
@@ -233,81 +260,3 @@
   <div class="widespread-logo">
     <img src="/images/system/widespread_logo_1d.png" alt="WideSpread Logo">
   </div>
-
-
-  <!-- Register Form -->
-
-  <div class="register-form">
-    <%- include ('./partials/messages') %>
-    <form action="/users/register" method="POST">
-      <div class="glass" style="border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-left: none;">
-      <h5><i class="fas fa-user-plus"></i> Register</h5>
-        <div class="input-group">
-            <label for="name" style="color: #fff"> First Name</label>
-            <input
-            type="name"
-            id="fname"
-            name="fname"
-            class="input-control login-input"
-            placeholder="Enter First Name"
-            value="<%= typeof name != 'undefined' ? fname : '' %>"
-            />
-        </div>
-        <div class="input-group">
-          <div class="input-data">
-            <label for="name" style="color: #fff"> Last Name</label>
-          </div>
-            <input
-            type="name"
-            id="lname"
-            name="lname"
-            class="input-control login-input"
-            placeholder="Enter Last Name"
-            value="<%= typeof name != 'undefined' ? lname : '' %>"
-            />
-        </div>
-        <div class="input-group">
-          <div class="input-data">
-            <label for="email" style="color: #fff">Email</label>
-            <input
-            type="email"
-            id="email"
-            name="email"
-            class="input-control login-input"
-            placeholder="Enter Email"
-            value="<%= typeof email != 'undefined' ? email : '' %>"
-            />
-          </div>
-        </div>
-        <div class="input-group">
-          <div class="input-data">
-            <label for="password" style="color: #fff">Password</label>
-            <input
-            type="password"
-            id="password"
-            name="password"
-            class="input-control login-input"
-            placeholder="Create Password"
-            value="<%= typeof password != 'undefined' ? password : '' %>"
-            />
-          </div>
-        </div>
-        <div class="input-group">
-          <div class="input-data">
-            <label for="password2" style="color: #fff">Confirm Password</label>
-            <input
-            type="password"
-            id="password2"
-            name="password2"
-            class="input-control login-input"
-            placeholder="Confirm Password"
-            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-            />
-          </div>
-        </div>
-      </div>
-      <button type="submit" style="border-radius: 0; border-top-left-radius: 8px; border-bottom-left-radius: 8px; margin-left: 50%; border-right: none;">Register</button>
-    </form>
-  </div>
-
-</div>

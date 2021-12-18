@@ -72,18 +72,157 @@
     
     }
     
+
+
+
+    .photo-album-container {
+        margin: 0 auto;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        width: 90%;
+        border-radius: 10px;
+    }
+    .photo-album-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.5);
+        border-bottom: outset 2px lightskyblue;
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .photo-album-title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .photo-album-header h4 {
+        padding: 10px;
+        font-size: 2rem;
+    }
+    .photo-album-header small {
+        padding: 10px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    .private {
+        color: red;
+    }
+    .photo-album-description {
+        padding: 10px;
+        color: #fff;
+        width: 90%;
+        margin-bottom: 20px;
+    }
+    .photos {
+        padding: 15px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    .photo {
+        width: 300px;
+        max-width: 300px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    .photo img {
+        width: 100%;
+        border-radius: 8px;
+    }
+     .photo-album-image-form form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border: outset 2px lightskyblue;
+    }
+
+    .custom-file-profile-image {
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+    }
+
+    .custom-file-label-choose-profile-image {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #fff;
+        width: 100%;
+        padding: 8px;
+    }
+    .photo-album-image-form button {
+        background: rgba(0, 255, 0, 0.5);
+        border: outset 2px lime;
+        padding: 8px;
+        border-radius: 5px;
+        color: #fff;
+        width: 100px;
+        cursor: pointer;
+    }
+    
+
+    .album-options {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 8px;
+        border: outset 2px lightskyblue;
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 50%;
+        margin: 0 auto;
+    }
+    .delete {
+        background: rgba(255, 0, 0, 0.5);
+    }
+    .album-options a {
+        padding: 8px;
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: #fff;
+        border: outset 2px lightskyblue;
+        border-radius: 5px;
+        transition: ease-in 0.3s;
+    }
+    .album-options a:hover {
+        background: rgba(0, 0, 0, 0.75);
+        color: lightskyblue;
+        transition: ease-in 0.3s;
+    }
     </style>
 
 
+
 <div class="photo-album-container" style="background: <%= photoAlbums.album_color %>;">
-    <h4><%= photoAlbums.album_name %>
-        <% if (photoAlbums.private === true) { %>
-            <small>Private</small>
-        <% } else { %>
-            <small>Public</small>
-        <% } %>
-    </h4>
-    <p><%= photoAlbums.album_description %></p>
+    <div class="photo-album-header">
+        <div class="photo-album-title">
+            <h4><%= photoAlbums.album_name %></h4>
+            <% if (photoAlbums.private === true) { %>
+                <small class="private">Private</small>
+            <% } else { %>
+                <small>Public</small>
+            <% } %>
+        </div>
+        <div class="photo-album-description">
+            <p><%= photoAlbums.album_description %></p>
+        </div>
+    </div>
     <div class="photo-preview-slider">
         <div class="photo-preview-slide">
             <% if(!photoAlbums.photos) { %>
@@ -102,15 +241,13 @@
                     </form>
                 </div>
             <% } else { %>
-                <% photoAlbums.photos.forEach(function(photo) { %>
-                    <div class="photos">
-
-                        <div class="photo">
-                            <img src="/image/<%= photo %>" alt="">
-                        </div>
-                        
-                    </div>
-                    <% }) %>
+                <div class="photos">
+                    <% photoAlbums.photos.forEach(function(photo) { %>
+                            <div class="photo">
+                                <img src="/image/<%= photo %>" alt="">
+                            </div>
+                <% }) %>
+                 </div>
                 </div>
             </div>
             <% } %>
@@ -119,12 +256,19 @@
     <form action="/upload-to-album/<%= thisUser.id %>/<%= albumId %>" method="post" enctype="multipart/form-data">
         <input type="text" name="albumOwner" id="albumOwner" style="display: none;" value="<%= thisUser.id  %>">
         <div class="custom-file-profile-image">
-            <input type="file" name="photos" id="photos">
             <label for="photos" class="custom-file-label-choose-profile-image">Upload an Image</label>
+            <input type="file" name="photos" id="photos">
         </div>
         
         <div>
             <button type="submit" class="custom-file-profile-image-button">Add</button>
         </div>
     </form>
+</div>
+</div>
+
+
+<div class="album-options">
+    <a href="/photo-album/<%= thisUser.id %>/<%= albumId %>/edit">Edit Album</a>
+    <a href="/photo-album/<%= thisUser.id %>/<%= albumId %>/delete" class="delete">Delete Album</a>
 </div>

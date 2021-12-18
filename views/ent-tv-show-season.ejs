@@ -1,15 +1,31 @@
 <style>
-            .spread-break hr {
-    background: lightskyblue;
-    box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.534);
-    width: 80%;
-    margin-left: 10%;
-    border-radius: 50%;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    .main-header-page-menu-container {
+        background: rgba(135, 206, 250, 0.5);
+        border-top: outset 2px #fff;
+        border-bottom: outset 2px #fff;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
+        margin-bottom: 20px;
     }
 
-    
+    .main-header-page-menu-inner {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .main-header-page-menu-inner-item {
+        min-width: 25%;
+        margin-top: 5px;
+    }
+    .main-header-page-menu-inner-item a {
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        padding: 5px;
+        font-size: 1.3rem;
+    }
     .show-search {
         background: rgba(255, 255, 255, 0.3);
         border-radius: 8px;
@@ -66,13 +82,17 @@
         max-height: 100%;
         min-height: 100%;
     }
+    .episodes-container h5 {
+        font-size: 1.3rem;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
     .episodes {
         display: inline-flex;
         overflow-x: scroll;
         width: 90%;
         margin-left: 5%;
-        height: auto;
-        overflow-y: hidden;
+        height: 550px;
     }
     .episode {
         width: 300px;
@@ -85,18 +105,23 @@
         border-radius: 8px;
         margin-right: 20px;
     }
+    .episode a {
+        text-decoration: none;
+        font-size: 1.3rem;
+    }
     .episode-image {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 300px;
         z-index: -25;
     }
     .episode-image img {
         width: 100%;
         height: 100%;
-        border-radius: 8px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
     }
     .episode h5 {
         background: rgba(255, 255, 255, 0.3);
@@ -109,24 +134,53 @@
         color: #fff;
         backdrop-filter: blur(2px);
     }
-    .episode p {
-        background:rgba(255, 255, 255, 0.3);
-        color: #fff;
-        padding: 10px;
-        height: 100px;
+
+    .episode-overview {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
         position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        overflow-y: scroll;
-        margin-bottom: 0;
+        top: 100%;
+        max-height: 250px;
+        overflow-y: auto;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
-        border-top: groove 2px lightskyblue;
-        backdrop-filter: blur(2px);
     }
+    .episode-overview p {
+        padding: 8px;
+        text-align: justify;
+        color: #fff;
 
+    }
 </style>
+
+<div class="main-header-page-menu-container">
+    <div id="mainHeaderPageMenu">
+        <div class="main-header-page-menu-inner">
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment">Home</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/movies">Movies</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/tv">TV Shows</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/music">Music</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/podcasts">Podcasts</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/audio-books">Audio Books</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/sports">Sports</a>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <div class="show-search">
     <form action="/entertainment/tv/search" method="POST">
@@ -142,17 +196,21 @@
 
 </div>
 
-<h5>Episodes</h5>
-<div class="episodes">
-    <% returnedData.episodes.forEach(function(episode) { %>
-        <a href="/entertainment/tv/<%= showId %>/<%= episode.season_number %>/<%= episode.episode_number %>">
-        <div class="episode">
-            <div class="episode-image">
-                <img src="https://image.tmdb.org/t/p/w500<%= episode.still_path %>" alt="">
+<div class="episodes-container">
+    <h5>Episodes</h5>
+    <div class="episodes">
+        <% returnedData.episodes.forEach(function(episode) { %>
+            <div class="episode">
+            <a href="/entertainment/tv/<%= showId %>/<%= episode.season_number %>/<%= episode.episode_number %>">
+                <div class="episode-image">
+                    <img src="https://image.tmdb.org/t/p/w500<%= episode.still_path %>" alt="">
+                </div>
+                <h5><%= episode.name %></h5>
+            </a>
+            <div class="episode-overview">
+                <p><%= episode.overview %></p>
             </div>
-            <h5><%= episode.name %></h5>
-            <p><%= episode.overview %></p>
         </div>
-    </a>
-    <% }) %>
+        <% }) %>
+    </div>
 </div>

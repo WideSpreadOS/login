@@ -1,33 +1,53 @@
 <style>
-
-.spread-break hr {
-    background: lightskyblue;
-    box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.534);
-    width: 80%;
-    margin-left: 10%;
-    border-radius: 50%;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    .main-header-page-menu-container {
+        background: rgba(135, 206, 250, 0.5);
+        border-top: outset 2px #fff;
+        border-bottom: outset 2px #fff;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
+        margin-bottom: 20px;
     }
 
-    
+    .main-header-page-menu-inner {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .main-header-page-menu-inner-item {
+        min-width: 25%;
+        margin-top: 5px;
+    }
+    .main-header-page-menu-inner-item a {
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        padding: 5px;
+        font-size: 1.3rem;
+    }
     .show-search {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.3);
         border-top: groove 2px lightskyblue;
         border-bottom: groove 2px lightskyblue;
-        padding: 10px;
         padding-bottom: 0;
+        padding-top: 10px;
         width: 100%;
         margin-bottom: 30px;
+        border-radius: 0;
     }
     .show-search input {
-        width: 90%;
-        margin-left: 5%;
-        border-radius: 8px;
+        width: 100%;
         outline: none;
         border: none;
         padding: 5px;
+        background: rgba(135, 206, 250, 0.5);
+        backdrop-filter: blur(4px);
+        color: #fff;
+        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.75);
+    }
+    .show-search input::placeholder {
+        color: #fff;
     }
     .show-search button {
         width: 80%;
@@ -41,9 +61,23 @@
         border-top-left-radius: 8px;  
         border-top-right-radius: 8px;  
     }
-    h5 {
+    .similar-shows {
+        background:rgba(0, 0, 0, 0.6);
+        border-top: outset 2px lightskyblue;
+        border-bottom: outset 2px lightskyblue;
         text-align: center;
+        padding: 18px;
+    }
+    .similar-shows a {
         color: #fff;
+        text-decoration: none;
+        background: rgba(135, 206, 250, 0.25);
+        backdrop-filter: blur(4px);
+        border: outset 1px #fff;
+        box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        padding: 5px;
+        font-size: 1.3rem;
+        border-radius: 5px;
     }
     .show-image {
         position: fixed;
@@ -54,12 +88,27 @@
         min-height: 100%;
         z-index: -80;
     }
+    .show-container {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top: outset 2px lightskyblue;
+        border-bottom: outset 2px lightskyblue;
+        margin-bottom: 20px;
+    }
     .show-container h3 {
         text-align: center;
         padding: 10px;
+        font-size: 1.5rem;
+    }
+    .show-container h6 {
+        text-align: center;
+        padding: 5px;
     }
     .show-container p {
         color: #fff;
+        padding: 10px;
     }
     .show-image img {
         max-width: 100%;
@@ -67,11 +116,23 @@
         max-height: 100%;
         min-height: 100%;
     }
+    .seasons-container {
+        margin-top: 30px;
+    }
+    .seasons-container h5 {
+        font-size: 1.3rem;
+        padding: 8px;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        border-top: outset 2px lightskyblue;
+        border-bottom: outset 2px lightskyblue;
+    }
     .seasons {
         display: inline-flex;
         overflow-x: scroll;
         width: 90%;
         margin-left: 5%;
+        margin-top: 15px;
 
     }
     .season {
@@ -85,6 +146,10 @@
         border-radius: 8px;
         margin-right: 20px;
     }
+    .season a {
+        text-decoration: none;
+    }
+
     .season-image {
         position: absolute;
         top: 0;
@@ -99,8 +164,9 @@
         border-radius: 8px;
     }
     .season p {
-        background: rgba(255, 255, 255, 0.3);
-        border-bottom: groove 2px lightskyblue;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+        border-bottom: outset 2px lightskyblue;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         z-index: 10;
@@ -130,17 +196,45 @@
         margin-bottom: 20px;
     }
     .add-to-list button {
-        width: 80%;
-        margin-left: 10%;
+        width: 100%;
         border: none;
         border-top: groove 2px green;
         border-bottom: groove 2px green;
-        border-radius: 8px;
         background: rgba(0, 128, 0, 0.3);
         color: #fff;
         outline: none;
+        padding: 5px;
+        font-size: 1.3rem;
     }
 </style>
+<div class="main-header-page-menu-container">
+    <div id="mainHeaderPageMenu">
+        <div class="main-header-page-menu-inner">
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment">Home</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/movies">Movies</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/tv">TV Shows</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/music">Music</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/podcasts">Podcasts</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/audio-books">Audio Books</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/sports">Sports</a>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <div class="show-search">
     <form action="/entertainment/tv/search" method="POST">
@@ -157,31 +251,43 @@
         <button type="submit">Add to Your List</button>
     </form>
 </div>
+<div class="show-image">
+    <img src="https://image.tmdb.org/t/p/w500<%= returnedData.poster_path %>" alt="">
+</div>
+
 <div class="show-container">
-    <div class="show-image">
-        <img src="https://image.tmdb.org/t/p/w500<%= returnedData.poster_path %>" alt="">
-    </div>
     <div class="show-title">
         <h3> <%= returnedData.name %></h3>
     </div>
     <p><%= returnedData.overview %></p>
 </div>
-<h5> <%= returnedData.created_by[0].name %></h5>
 
-<h5>Seasons</h5>
-<div class="seasons">
-    <% returnedData.seasons.forEach(function(season) { %>
-        <a href="/entertainment/tv/<%= showId %>/<%= season.season_number %>">
-            <div class="season">
-                <div class="season-image">
-                    <img src="https://image.tmdb.org/t/p/w500<%= season.poster_path %>" alt="">
-                </div>
-                <p><%= season.name %></p>
-            </div>
-        </a>
-    <% }) %>
+
+<div class="similar-shows">
+    <a href="/entertainment/similar/tv/<%= showId %>">Similar Shows</a>
 </div>
 
+<div class="seasons-container">
+    <h5>Seasons</h5>
+    <div class="seasons">
+        <% returnedData.seasons.forEach(function(season) { %>
+            <div class="season">
+                <a href="/entertainment/tv/<%= showId %>/<%= season.season_number %>">
+                    <div class="season-image">
+                        <img src="https://image.tmdb.org/t/p/w500<%= season.poster_path %>" alt="">
+                    </div>
+                    <p><%= season.name %></p>
+                </a>
+            </div>
+            <% }) %>
+    </div>
+</div>
+
+
+
+
+
+<!-- ADD TO WIDESPREAD DATABASE -->
 <div class="add-to-recommended">
     <form action="/entertainment/tv/add-to-recommended" method="post">
         <input type="text" name="name" value="<%= returnedData.name %>" hidden>

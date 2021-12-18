@@ -1,0 +1,147 @@
+<style>
+.add-photo-form {
+        width: 50%;
+        margin: 0 auto;
+    }
+    .add-photo-form h3 {
+        font-size: 2rem;
+        border-bottom: outset 2px lightskyblue;
+        width: 100%;
+        text-align: center;
+        padding: 8px;
+    }
+    .add-photo-form form {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        border: outset 2px lightskyblue;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .custom-file-profile-image {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .custom-file-profile-image label {
+        text-align: left;
+        width: fit-content;
+    }
+    .custom-file-profile-image input {
+        width: 100%;
+    }
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+        width: 75%;
+    }
+    .input-group input {
+        width: 90%;
+        padding: 5px;
+        border-radius: 5px;
+        outline: none;
+        border: inset 1px lightskyblue;
+    }
+    .input-group p {
+        text-align: center;
+        font-size: 1.3rem;
+        color: #fff;
+        padding: 5px;
+    }
+    .tags {
+        width: 90%;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    .input-group-tags {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .input-group-tags input {
+        border-radius: 5px;
+        padding: 5px;
+        outline: none;
+        border: inset 1px lightskyblue;
+    }
+    .tags p {
+        font-size: 1.3rem;
+        color: #fff;
+        display: block;
+        text-align: center;
+        width: 100%;
+        padding: 5px;
+    }
+    .custom-file-profile-image-button {
+        width: 100px;
+        background: rgba(0, 255, 0, 0.5);
+        border: outset 2px lime;
+        outline: none;
+        padding: 8px;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+</style>
+
+
+<div class="photo-album-image-form">
+
+<div class="add-photo-form">
+    <form action="/upload-photo" method="post" enctype="multipart/form-data">
+        <h3>Add a Photo</h3>
+        <input type="text" name="image_owner" id="imageOwner" style="display: none;" value="<%= user.id %>">
+        <div class="custom-file-profile-image">
+            <label for="photo" class="custom-file-label-choose-profile-image">Choose Photo</label>
+            <input type="file" name="photo" id="photo">
+        </div>
+        <div class="input-group">
+            <p>Caption</p>
+            <input type="text" name="caption" placeholder="Describe your photo">
+        </div>
+        <div class="input-group">
+            <p>Location</p>
+            <input type="text" name="location" placeholder="Location">
+        </div>
+        <div class="tags">
+            <p>Tags</p>
+            <div class="input-group-tags">
+                <input type="text" name="tags">
+                <input type="text" name="tags">
+                <input type="text" name="tags">
+            </div>
+        </div>
+        <button type="submit" class="custom-file-profile-image-button">Add</button>
+    </form>
+</div>
+
+<div class="user-photo-test">
+    <% photos.forEach(function(photo) { %>
+        <img src="/image/<%= photo.img.data %>" alt="">
+        <p>
+            <%= photo.caption %>
+        </p>
+        <p>
+            <%= photo.location %>
+        </p>
+        <div class="tags">
+            <% photo.tags.forEach(function(tag) { %>
+                <p>
+                    <%= tag %>
+                </p>
+            <% }) %>
+        </div>
+    <% }) %>
+</div>
+

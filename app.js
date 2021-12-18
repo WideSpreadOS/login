@@ -23,6 +23,9 @@ const Subpage = require('./models/Subpage');
 const Course = require('./models/Course');
 const Group = require('./models/Group');
 const Item = require('./models/Item');
+const UserPhoto = require('./models/UserPhoto');
+const UserAudio = require('./models/UserAudio');
+const Note = require('./models/Note');
 const Chat = require('./models/Chat');
 const fs = require('fs');
 
@@ -82,8 +85,9 @@ app.use((req, res, next) => {
     next();
 })
 
-//Init gfs
-
+//App Locals
+//app.locals.test = "Hello"
+//app.locals.array = ["Jon", "Mike", "Sally", "Sue"]
 
 //Init gfs
 const conn = mongoose.createConnection(db)
@@ -126,7 +130,7 @@ app.use('/users', require('./routes/users'));
 app.use('/business', require('./routes/businesses'));
 app.use('/academy', require('./routes/academy'));
 app.use('/tools', require('./routes/tools'));
-/* app.use('/news', require('./routes/news')); */
+app.use('/news', require('./routes/news'));
 app.use('/shopping', require('./routes/shopping'));
 app.use('/socialspread', require('./routes/socialspread'));
 app.use('/spreadshield', require('./routes/spreadshield'));
@@ -144,15 +148,60 @@ app.use('/government', require('./routes/government'));
 /* app.use('/sld', require('./routes/sld')); */
 /* app.use('/sld', require('./routes/sld')); */
 
+
+app.get('/upload-photo', ensureAuthenticated, async (req, res) => {
+  const userId = req.user.id;
+  const user = await User.findById(userId)
+  const photos = await UserPhoto.find({"image_owner": {$eq: userId}})
+  res.render('user-photos', {user, photos})
+
+})
+
+app.post('/upload-photo', upload.single('photo'), (req, res) => {
+  imageOwner = req.user._id;
+  const obj = {
+    image_owner: req.user._id,
+    caption: req.body.caption,
+    location: req.body.location,
+    tags: req.body.tags,
+    img: {
+      data: req.file.filename,
+      contentType: 'image/png'
+    }
+  }
+  UserPhoto.create(obj, (err, item) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      item.save();
+      console.log(`Image Owner: ${imageOwner} Image Data: ${req.file}`);
+      User.findByIdAndUpdate(imageOwner,
+        { $push: { user_images: req.file.id } },
+        { safe: true, upsert: true },
+        function (err, doc) {
+          if (err) {
+            console.log(err)
+          } else {
+            return
+          }
+        }
+      )
+      res.redirect(req.get('referer'));
+    }
+    })
+});
+
+
 app.post('/upload', upload.single('user_image'), (req, res) => {
   const imageOwner = req.user._id;
   const obj = { 
     imageOwner: req.user._id, 
-    img: { 
-        data: req.file.filename,
-        contentType: 'image/png'
+      img: { 
+          data: req.file.filename,
+          contentType: 'image/png'
+      } 
     } 
-} 
   profileImage.create(obj, (err, item) => { 
     if (err) { 
         console.log(err); 
@@ -550,6 +599,41 @@ app.post('/upload/groups/:groupId/upload-image', upload.single('main_images'), (
 })
 });
 
+/* Note Photo Upload */
+app.patch('/add-note-image/:noteId', upload.single('note_images'), (req, res) => {
+  const noteId = req.params.noteId;
+  const obj = {
+    imageOwner: noteId,
+    img: {
+      data: req.file.filename,
+      contentType: 'image/png'
+    }
+  }
+  userBackgroundImage.create(obj, (err, item) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      item.save();
+      console.log(`Image Owner: ${noteId} Image Data: ${obj.img.data}`);
+      const newImage = obj.img.data;
+      Note.findByIdAndUpdate(noteId,
+        {$addToSet: { note_images: req.file.filename }},
+        { upsert: true, new: true },
+        function (err, doc) {
+          if (err) {
+            console.log(err)
+          } else {
+            return
+          }
+        }
+      )
+      res.redirect(req.get('referer'));
+    }
+  })
+});
+
+
 
 /* Video Upload */
 app.post('/upload-video', upload.single('user_video'), (req, res) => {
@@ -620,6 +704,46 @@ Audio.create(obj, (err, item) => {
 }); 
 }); 
 
+
+
+app.post('/upload-user-audio', upload.single('audio'), async (req, res) => {
+  audio_owner = req.user._id;
+  const obj = {
+    audio_owner: req.user._id,
+    album: req.body.album,
+    song: req.body.song,
+    artist: req.body.artist,
+    genre: req.body.genre,
+    tags: req.body.tags,
+    img: {
+      data: req.file.filename,
+      contentType: 'audio/mp3'
+    }
+  }
+  console.log(req.file.filename)
+  await UserAudio.create(obj, (err, item) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      item.save();
+      console.log(`Audio Owner: ${audio_owner} Audio Data: ${req.file}`);
+      User.findByIdAndUpdate(audio_owner,
+        { $push: { user_audio: req.file.filename } },
+        { safe: true, upsert: true },
+        function (err, doc) {
+          if (err) {
+            console.log(err)
+          } else {
+            return
+          }
+        }
+      )
+      res.redirect(req.get('referer'));
+    }
+  })
+});
+
 app.get('/files', (req, res) => {
   gfs.files.find().toArray((err, files) => {
     // Check if Files
@@ -658,10 +782,10 @@ app.get('/audio/:filename', (req, res) => {
           });
         }
             // Files do exist
-            if(file.contentType === 'audio/mpeg' || file.contentType === 'audio/ogg') {
+            if(file.contentType === 'audio/mpeg' || file.contentType === 'audio/ogg' || file.contentType === 'audio/mp3') {
               // Read the output to the stream
               const readstream = gfs.createReadStream(file.filename);
-              readstream.pipe(res);
+              return readstream.pipe(res);
             } else {
               res.status(404).json({
                 err: 'Not an audio file'
@@ -704,7 +828,31 @@ app.get('/image/:filename', (req, res) => {
           })
         }
   })
-})
+});
+
+
+app.get('/audio/:filename', (req, res) => {
+  gfs.files.findOne({filename: req.params.filename}, (err, file) => {
+        // Check if Files
+        if(!file || file.lenth === 0) {
+          return res.status(404).json({
+            err: 'That file does not exist'
+          });
+        }
+    
+        // Files do exist
+        if(file.contentType === 'audio/mp3') {
+          // Read the output to the stream
+          const readstream = gfs.createReadStream(file.filename);
+          readstream.pipe(res);
+          console.log(res)
+        } else {
+          res.status(404).json({
+            err: 'Not an audio file'
+          })
+        }
+  })
+});
 
 
 

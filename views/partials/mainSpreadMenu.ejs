@@ -13,48 +13,16 @@
             min-height: 100vh;
             width: 15vw;
             z-index: 99999;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
 
         .main-spread-menu h6 {
             text-align: center;
             padding: 10px;
-
-            border-bottom: groove 2px lightskyblue;
+            background: rgba(135, 206, 250, 0.5);
             box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
         }
-        .spread-menu-card {
-            background: lime;
-            padding-bottom: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(2px);
-            border-bottom: groove 2px lightskyblue;
-            box-shadow: 0 5px 3px rgba(0, 0, 0, 0.5);
-        }
-        .card-name {
-        }
-        .card-name p {
-            text-align: center;
-            padding: 5px;
-            color: #fff;
-            border-top: groove 2px lightskyblue;
-            border-bottom: groove 1px lightskyblue;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        .card-slider {
-            background: #333;
-            display: inline-flex;
-            width: 100%;
-            overflow-x: scroll;
-            padding-bottom: 10px;
-        }
-        .card-slider i {
-            background: rgba(255, 255, 255, 0.25);
-            color: rgba(255, 255, 255, 0.5);
-            text-shadow: 0 0 2px lightskyblue;
-            font-size: 2rem;
-            padding: 5px;
-        }
+
         .main-menu {
             
         }
@@ -78,18 +46,19 @@
             border-top: groove 2px lightskyblue;
             border-bottom: groove 2px lightskyblue;
             box-shadow: 0 4px 4px 2px #000;
+            padding-left: 8px;
         }
-        .main-menu-item-container h5 {
+        .main-menu-item-container a {
             color: #fff;
             text-shadow: 0 0 2px #000;
             margin-bottom: 0;
-
-        }
-        .main-menu-item-container a {
+            font-size: 1.3rem;
+            padding: 1px;
             text-decoration: none;
         }
         .main-menu-item-container a:hover {
             text-decoration: none;
+            padding: 1px;
         }
         .main-menu-item  {
             position: relative;
@@ -165,58 +134,46 @@
 
 
 <div class="main-spread-menu">
-    <div class="schedule">
-        <div class="current-time-data" style="position: fixed; top: 30px; left: 30px; z-index: 200000;">
-           
-        </div>
-    </div>
-
     <h6>Main Spread Menu</h6>
-
-
-    <!-- Weather -->
-
-        <div class="weather-container-card">
-            <p>No Weather Connected</p>
+    <div class="main-menu">
+        <div class="main-menu-item-container">
+            <a href="/socialspread"><h5>SocialSpread</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/academy"><h5>Academy</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/business"><h5>Business</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/entertainment"><h5>Entertainment</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/leisure"><h5>Leisure</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/news"><h5>News</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/wellness"><h5>Wellness</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/government"><h5>Government</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/shopping"><h5>Shopping</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/vr-ar"><h5>VR/AR</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/tools"><h5>Tools</h5></a>
+        </div>
+        <div class="main-menu-item-container">
+            <a href="/create"><h5>Create</h5></a>
         </div>
 
-
-<div class="main-menu">
-    <div class="main-menu-item-container">
-        <a href="/dashboard/wall"><h5>SocialSpread</h5></a>
-        
     </div>
-    <div class="main-menu-item-container">
-        <a href="/academy"><h5>Academy</h5></a>
-    </div>
-    <div class="main-menu-item-container">
-        <a href="/business"><h5>Business</h5></a>
-    </div>
-    <div class="main-menu-item-container">
-        <a href="/leisure"><h5>Leisure</h5></a>
-    </div>
-    <div class="main-menu-item-container">
-        <a href="/news"><h5>News</h5></a>
-    </div>
-    <div class="main-menu-item-container">
-        <a href="/wellness"><h5>Wellness</h5></a>
-    </div>
-    <div class="main-menu-item-container">
-        <a href="/government"><h5>Government</h5></a>
-    </div>
-    <div class="main-menu-item-container">
-        <a href="/shopping"><h5>Shopping</h5></a>
-    </div>
-    <div class="main-menu-item-container">
-        <a href="/vr-ar"><h5>VR/AR</h5></a>
-    </div>
-    <div class="main-menu-item-container">
-        <a href="/tools"><h5>Tools</h5></a>
-    </div>
-    <div class="main-menu-item-container">
-        <a href="/create"><h5>Create</h5></a>
-    </div>
-
 </div>
 
 

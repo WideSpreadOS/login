@@ -1,0 +1,214 @@
+<style>
+
+
+    .main-header-page-menu-container {
+        background: rgba(135, 206, 250, 0.5);
+        border-top: outset 2px #fff;
+        border-bottom: outset 2px #fff;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
+        margin-bottom: 20px;
+    }
+
+    .main-header-page-menu-inner {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .main-header-page-menu-inner-item {
+        min-width: 25%;
+        margin-top: 5px;
+    }
+    .main-header-page-menu-inner-item a {
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        padding: 5px;
+        font-size: 1.3rem;
+    }
+    .show-search {
+        background: rgba(255, 255, 255, 0.3);
+        border-top: groove 2px lightskyblue;
+        border-bottom: groove 2px lightskyblue;
+        padding-bottom: 0;
+        padding-top: 10px;
+        width: 100%;
+        margin-bottom: 30px;
+        border-radius: 0;
+    }
+    .show-search input {
+        width: 100%;
+        outline: none;
+        border: none;
+        padding: 5px;
+        background: rgba(135, 206, 250, 0.5);
+        color: #fff;
+        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.75);
+    }
+    .show-search input::placeholder {
+        color: #fff;
+    }
+    .show-search button {
+        width: 80%;
+        margin-left: 10%;
+        background: green;
+        border: groove 2px green;
+        border-bottom: none;
+        margin-bottom: 0;
+        color: #fff;
+        margin-top: 10px;
+        border-top-left-radius: 8px;  
+        border-top-right-radius: 8px;  
+    }
+    .show-container {
+        width: 200px;
+        max-width: 200px;
+        min-width: 200px;
+        height: 300px;
+        min-height: 300px;
+        max-height: 300px;
+        position: relative;
+        border-radius: 8px;
+        margin-right: 20px;
+    }
+
+    .show-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -25;
+    }
+
+    .show-image img {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+    }
+
+    .show-title h5 {
+        background: rgba(255, 255, 255, 0.3);
+        border-bottom: groove 2px lightskyblue;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        z-index: 10;
+        padding: 5px;
+        text-align: center;
+    }
+
+
+    /* Shows */
+    .your-shows {
+        border-left: groove 1px lightskyblue;
+        border-right: groove 1px lightskyblue;
+        border-radius: 8px;
+        min-height: 200px;
+        background: rgba(135, 206, 250, 0.3);
+        background: rgba(0, 0, 0, 0.3);
+        margin-top: 30px;
+        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+    .your-shows h5 {
+        text-align: center;
+        padding: 10px;
+    }
+
+
+    /* Slider */
+
+    .slider {
+        width: 100%;
+        height: auto;
+        display: inline-flex;
+        overflow-x: scroll;
+        padding: 10px;
+
+    }
+
+    .slide-option {
+        width: 200px;
+        min-width: 200px;
+        border-radius: 8px;
+        margin-right: 20px;
+        padding-left: 20px;
+        border-top: groove 2px lightskyblue;
+        border-bottom: groove 2px lightskyblue;
+        background: rgba(255, 255, 255, 0.3);
+    }
+</style>
+
+<div class="page-title">
+    <h1>Your Shows</h1>
+</div>
+<div class="main-header-page-menu-container">
+    <div id="mainHeaderPageMenu">
+        <div class="main-header-page-menu-inner">
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment">Home</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/movies">Movies</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/tv">TV Shows</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/music">Music</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/podcasts">Podcasts</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/audio-books">Audio Books</a>
+            </div>
+            <div class="main-header-page-menu-inner-item">
+                <a href="/entertainment/sports">Sports</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="show-search">
+    <form action="/entertainment/tv/search" method="POST">
+        <input type="text" name="show" id="show" placeholder="Search for shows...">
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+
+
+<div class="your-shows">
+    <h5 style="text-align: center;">Your Shows</h5>
+    <div class="slider">
+        <% user.show_list.forEach(function(show) { %>
+            <a href="/entertainment/tv/<%= show.show_link %>">
+                <div class="show-container">
+                    <div class="show-image">
+                        <img width="200px" height="300px" src="https://image.tmdb.org/t/p/w500<%= show.show_poster %>"
+                            alt="">
+                    </div>
+                </div>
+            </a>
+            <% }) %>
+
+    </div>
+</div><div class="your-shows">
+    <h5>Recommended Shows</h5>
+    <div class="slider">
+        <% tvShow.forEach(function(show) { %>
+            <a href="/entertainment/tv/<%= show.link %>">
+                <div class="show-container">
+                    <div class="show-image">
+                        <img width="200px" height="300px" src="https://image.tmdb.org/t/p/w500<%= show.poster %>"
+                            alt="">
+                    </div>
+                </div>
+            </a>
+            <% }) %>
+    </div>
+</div>

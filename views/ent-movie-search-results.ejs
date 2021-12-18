@@ -1,0 +1,140 @@
+<style>
+    .movie-search {
+        background: rgba(0, 0, 0, 0.3);
+        border-top: groove 2px lightskyblue;
+        border-bottom: groove 2px lightskyblue;
+        padding-bottom: 0;
+        padding-top: 10px;
+        width: 100%;
+        margin-bottom: 30px;
+        border-radius: 0;
+    }
+    .movie-search input {
+        width: 100%;
+        outline: none;
+        border: none;
+        padding: 5px;
+        background: rgba(135, 206, 250, 0.5);
+        backdrop-filter: blur(4px);
+        color: #fff;
+        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.75);
+    }
+    .movie-search input::placeholder {
+        color: #fff;
+    }
+    .movie-search button {
+        width: 80%;
+        margin-left: 10%;
+        background: green;
+        border: groove 2px green;
+        border-bottom: none;
+        margin-bottom: 0;
+        color: #fff;
+        margin-top: 10px;
+        border-top-left-radius: 8px;  
+        border-top-right-radius: 8px;  
+    }
+    .spread-header-container {
+        margin-bottom: 30px;
+        min-height: 150px;
+        max-height: 150px;
+        overflow: hidden;
+        position: relative;
+    }
+    .spread-slider-container {
+        min-height: 200px;
+        margin-top: 10px;
+        border-top: outset 2px #333;
+        border-bottom: outset 2px #333;
+    }
+    .spread-slider-container h5 {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(4px);
+        padding: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .spread-slider-container>h5>b {
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.75);
+        text-shadow: 0 0 2px lightskyblue;
+        font-weight: bolder;
+        text-transform: capitalize;
+    }
+    
+
+    
+
+    .spread-slider {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .spread-slider-item {
+        margin-bottom: 10px;
+    }
+    .spread-slider-item-background {
+    }
+    .spread-slider-item-background img {
+        border-radius: 8px;
+        max-width: 150px;
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.534);
+    }
+    .spread-header-slider-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        min-height: 150px;
+        
+        
+    }
+    
+    .spread-header-slider-item {
+        min-height: 150px;
+        min-height: 100%;
+        background: rgba(0, 0, 0, 0.25);
+        height: 100px;
+        border: solid 1px #fff;
+        box-shadow: inset 0 0 3px rgba(135, 206, 250, 0.6);
+        border-top: none;
+        width: 20%;
+    }
+</style>
+
+<div class="page-title">
+    <h1>Movies</h1>
+</div>
+
+<%- include('partials/entertainment/zone-nav') %>
+
+
+    <div class="movie-search">
+        <form action="/entertainment/movies/search" method="POST">
+            <input type="text" name="movie" id="movie" placeholder="Search for movies...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+
+    <div id="movieContainer" class="spread-slider-container">
+        <h5>Results for <b><%= query %></b></h5>
+        <div class="spread-slider-anchor">
+            <div class="spread-slider-rack">
+                <div id="movieSpreadSlider" class="spread-slider">
+                    <% returnedData.Search.forEach(function(movie) { %>
+                        <div class="spread-slider-item">
+                            <a href="/entertainment/movies/<%= movie.Title %>">
+                                <div class="spread-slider-item-background">
+                                    <img src="<%= movie.Poster %>" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
